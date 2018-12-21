@@ -1,0 +1,26 @@
+swarm:
+  metricsEnabled: true
+  tracingEnabled: false
+  profilingEnabled: false
+  image:
+    repository: ethdevops/swarm
+    tag: edge
+  replicaCount: 20
+  config:
+    ens_api: http://mainnet-geth-geth.geth:8545
+    verbosity: 3
+    debug: true
+    maxpeers: 19
+    bzznetworkid: 3
+  secrets:
+    password: qwerty
+  persistence:
+    enabled: false
+  ingress:
+    domain: stg.swarm-gateways.net
+    enabled: true
+    tls:
+      acmeEnabled: true
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-body-size: 50m
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
