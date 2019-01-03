@@ -20,7 +20,8 @@ swarm:
     domain: stg.swarm-gateways.net
     enabled: true
     tls:
-      acmeEnabled: true
+      enabled: true
+      acmeEnabled: false
     annotations:
       nginx.ingress.kubernetes.io/proxy-body-size: 50m
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
