@@ -1,0 +1,6 @@
+smoke:
+  config:
+    schedule: "*/5 * * * *"
+    filesize: 110
+    swarmReplicas: 20
+    target: "swarm"
