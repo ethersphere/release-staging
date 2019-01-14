@@ -1,6 +1,6 @@
 smoke:
+  schedule: "*/5 * * * *"
   config:
-    schedule: "*/5 * * * *"
     filesize: 50
     swarmReplicas: 20
     syncdelay: 30
