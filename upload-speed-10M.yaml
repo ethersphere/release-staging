@@ -1,0 +1,6 @@
+uploadSpeed:
+  schedule: "*/5 * * * *"
+  config:
+    filesize: 10000 
+    swarmReplicas: 1 
+    target: "swarm"
