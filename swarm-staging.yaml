@@ -2,6 +2,7 @@ swarm:
   metricsEnabled: true
   tracingEnabled: false
   profilingEnabled: false
+  terminationGracePeriodSeconds: 5
   image:
     repository: ethdevops/swarm
     tag: edge
