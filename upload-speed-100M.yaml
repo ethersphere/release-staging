@@ -1,4 +1,4 @@
-uploadSpeed:
+smoke:
   schedule: "*/5 * * * *"
   config:
     filesize: 100000
