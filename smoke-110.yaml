@@ -1,6 +1,12 @@
 smoke:
   schedule: "*/5 * * * *"
   config:
-    filesize: 110
-    swarmReplicas: 20
+    name: "upload-sync-110-5-30"
+    swarmReplicas: 5
     target: "swarm"
+    operation: "upload_and_sync"
+    extraFlags:
+      - --single
+      - --filesize=110
+      - --sync-delay=30
+
