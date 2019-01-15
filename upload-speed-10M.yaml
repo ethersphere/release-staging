@@ -1,7 +1,9 @@
 smoke:
   schedule: "*/5 * * * *"
   config:
-    filesize: 10000 
+    name: "upload-speed-10M"
     swarmReplicas: 1 
     target: "swarm"
     operation: "upload_speed"
+    extraFlags:
+      - --filesize=10000
