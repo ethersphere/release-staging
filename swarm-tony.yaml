@@ -1,0 +1,51 @@
+bootnode:
+  image:
+    repository: ethdevops/swarm
+    tag: anton
+  config:
+    bzznetworkid: 300
+    verbosity: 5
+    maxpeers: 2000
+
+swarm:
+  metricsEnabled: true
+  tracingEnabled: false
+  profilingEnabled: false
+  terminationGracePeriodSeconds: 5
+  image:
+    repository: ethdevops/swarm
+    tag: anton
+  replicaCount: 200
+  podManagementPolicy: Parallel
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 0.1
+    limits:
+      memory: 1024Mi
+      cpu: 1.5
+  config:
+    ens_api: http://mainnet-geth-geth.geth:8545
+    verbosity: 5
+    debug: true
+    maxpeers: 2000
+    storesize: 300000
+    bzznetworkid: 300
+  secrets:
+    password: qwerty
+  persistence:
+    enabled: false
+  ingress:
+    domain: stg.swarm-gateways.net
+    enabled: true
+    tls:
+      enabled: true
+      acmeEnabled: false
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-body-size: 120m
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+
+influxdb:
+  persistence:
+    enabled: true
+    size: 40Gi

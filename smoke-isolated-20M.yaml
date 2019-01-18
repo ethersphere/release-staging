@@ -1,11 +1,11 @@
 smoke:
-  schedule: "*/3 * * * *"
+  schedule: "*/4 * * * *"
   image:
     repository: ethdevops/swarm
     tag: anton
   config:
     name: "upload-sync-20M-30"
-    swarmReplicas: 20
+    swarmReplicas: 200
     target: "swarm-private"
     operation: "upload_and_sync"
     extraFlags:

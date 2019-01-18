@@ -5,7 +5,7 @@ smoke:
     tag: anton
   config:
     name: "upload-sync-50M-30"
-    swarmReplicas: 20
+    swarmReplicas: 200
     target: "swarm-private"
     operation: "upload_and_sync"
     extraFlags:
