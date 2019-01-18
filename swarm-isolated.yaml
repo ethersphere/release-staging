@@ -5,11 +5,11 @@ swarm:
   terminationGracePeriodSeconds: 5
   image:
     repository: ethdevops/swarm
-    tag: anton
+    tag: edge
   replicaCount: 20
   config:
     ens_api: http://mainnet-geth-geth.geth:8545
-    verbosity: 3
+    verbosity: 5
     debug: true
     maxpeers: 19
     bzznetworkid: 3
