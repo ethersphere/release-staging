@@ -1,0 +1,19 @@
+language: generic
+dist: trusty
+sudo: false
+
+env:
+  global:
+  - KUBECTL_VERSION=1.10.3
+  - HELM_VERSION=2.11.0
+  - secure: VlosdIgtLDN/an/T7KoIHsL8Q2/noDVeFfYN8aTE1Jp2QIbHeqsaXGTS1Fr4SC5zBOmd0Fl5g8YavW/cHIrXaEodqbIbl5YI0P7/VPuVn5dfP1u0488sHIsqJosBCIse/23cRN0mKzeVi40+MtFtsmZsOOVYyD15+l3AA8L8ZuyVWEpUE2tbBWjcjXrwxzMzOepMrZKbteCaZzirUxd51yPiZe+I38XCq5rME7eSYcWpbL+IItgEaBrLIpuZcAuEuhDIIO72zBV5DIsB5pQT2msEoXjIefFYKlaOCtMpXlWomEYW7Ek4MhAZyXxa2f+i7Hn/Q71wxyejl0eoUb9BkQdUxoVoQE89JFEScEV+Ab4aVt33jcMC3VHf5GExgZdfl8GNz92Bakhn7xG96lZYCVeSvHEx6wHklvJ9zroFSD+FgrKUdeIdKEStlN2Mci+DmrbuccIXMOmyo9XGA/vj++4/SwarZudMHXnBtsXgQZqAFI0mQxJo/wRSJGKAbEhGv/JQ4aLyyICegJTvC3rzwz2V7/kE0MWrPR1YwEAa3j/C7DVmAuFoH1r1J9iEXCWZv79MptWU+63iinuE9L7mEh+gRcB6Ne/tYgapIFdnnjP+/xNtFkepVeXhIoQ7XtV/bHspEM1ETFANNAA5n1GJdJkdXzqkCiVh6D9AHN0qUok=
+  - secure: bz0md2pWaxlBC4pPjyx4n6LnzGFZ/RlojatCqzcvhuFib/5jVXg2GMxT9ehv7M0POR4wkbvzqgzbFIxy/9u4VE+xCGHlhJZ/fSJLvp99zyuerwXEeCuB8e1UczuOhLAeLNvubqJnbCZddteAv5sKUM23bbPhIdbudI2aclGg4k35ZcJ2a80yK7FLa+N+AGGvPSoObSH/vp+7RlV7awevnzo86j3xO41tXZ3CFF0e6m0lJ5lE/ELnZQUk/pDmipCQnwVgIa1nO1Sit/9+6wdJyMF0my0Bkio8LBnUcldr8jolv1xekQ+MeLDSSfJqNPJAK5ZVqm+97cinLUAeOGoMz8JSGaIerBrlct7wygUGpC+MR/SvQvee69wi5BAwF6ohWTXRe98hSng3Gsd7UIk/s8KMSuufmcl98CYmZjBm7v7Tvm1O7qseW8f+vYidiat+gP0lpfDrWcNlTjWpdm9NuoVWT0DAWnzmev/BHt+rMFk7konQR3x1STaph1XvzI1IPNoeND8CdNGvRPqJOx5IJ4/bCTtYcIcm/+CSV0cEjig546rvqPV+HzVaMCgA3jflyrEPNxZ8YpzWkPADfAdRt1OsaRo/jtYBr0W9rwqOyZ0oB1V4echP6+nevgOhpFOQi3JKd2ZqYMVmZZt4Q7Ue7v01T1HFIgB6gv8RO2NfsHY=
+
+install: .travis/install.sh
+
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: PATH=$(pwd)/bin/:$PATH .travis/deploy.sh
+  on:
+    branch: deploy-script
