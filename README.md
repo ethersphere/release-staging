@@ -1,4 +1,6 @@
-# Staging deployments
+# Swarm staging deployments
+
+[![Build Status](https://travis-ci.org/ethersphere/release-staging.svg?branch=master)](https://travis-ci.org/ethersphere/release-staging)
 
 This repository contains all the definitions for the staging releases used by the swarm team.
 
