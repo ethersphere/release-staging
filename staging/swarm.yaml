@@ -3,20 +3,20 @@ swarm:
   tracingEnabled: false
   profilingEnabled: false
   terminationGracePeriodSeconds: 5
+  podManagementPolicy: Parallel
   image:
     repository: ethdevops/swarm
     tag: edge
   replicaCount: 20
   config:
     ens_api: http://mainnet-geth-geth.geth:8545
-    verbosity: 3
+    verbosity: 4
     debug: true
-    maxpeers: 19
+    maxpeers: 25
     bzznetworkid: 3
+    storesize: "5000000" # 5000000 * 4KB = 20GB
   secrets:
     password: qwerty
-  persistence:
-    enabled: false
   ingress:
     domain: stg.swarm-gateways.net
     enabled: true
@@ -24,5 +24,29 @@ swarm:
       enabled: true
       acmeEnabled: false
     annotations:
-      nginx.ingress.kubernetes.io/proxy-body-size: 120m
+      nginx.ingress.kubernetes.io/proxy-body-size: 500m
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
+  persistence:
+    enabled: true
+    size: 30Gi
+    storageClass: gp2
+  resources:
+    requests:
+      memory: 512Mi
+      cpu: 0.1
+    limits:
+      memory: 1024Mi
+      cpu: 0.3
+
+influxdb:
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 0.1
+    limits:
+      memory: 8Gi
+      cpu: 4
+  persistence:
+    enabled: true
+    size: 40Gi
+    storageClass: gp2
