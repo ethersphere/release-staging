@@ -2,6 +2,12 @@
 
 This repository contains all the definitions for the staging releases used by the swarm team.
 
+We're using [helmsman](https://github.com/Praqma/helmsman) to manage the deployments to our kubernetes cluster. You can learn more about helmsman's [desired state specification](https://github.com/Praqma/helmsman/blob/master/docs/desired_state_specification.md).
+
+## Continuous Delivery
+
+Merges on master will trigger deployments via [Travis](.travis.yml).
+
 ## Secret management
 
 The following environment variables have to be encrypted:

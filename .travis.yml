@@ -17,4 +17,4 @@ deploy:
   skip_cleanup: true
   script: PATH=$(pwd)/bin/:$PATH .travis/deploy.sh
   on:
-    branch: deploy-script
+    branch: master
