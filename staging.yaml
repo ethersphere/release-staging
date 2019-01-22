@@ -1,0 +1,46 @@
+settings:
+  # Name of the service account within each namespace that should be used for tiller
+  serviceAccount: "tiller"
+
+namespaces:
+  kube-system:
+  staging:
+    protected: false
+    installTiller: true
+    labels:
+      env: "staging"
+
+helmRepos:
+  stable: "https://kubernetes-charts.storage.googleapis.com"
+  incubator: "http://storage.googleapis.com/kubernetes-charts-incubator"
+  ethersphere: "https://raw.githubusercontent.com/ethersphere/helm-charts-artifacts/master/"
+
+apps:
+  swarm-staging:
+    tillerNamespace: "staging"
+    namespace: "staging"
+    enabled: true
+    chart: "ethersphere/swarm"
+    version: "0.0.1"
+    description: "Swarm staging cluster"
+    valuesFile: "staging/swarm.yaml"
+    wait: true
+    timeout: 600
+  smoke-50:
+    tillerNamespace: "staging"
+    namespace: "staging"
+    enabled: true
+    chart: "ethersphere/smoke"
+    version: "0.0.1"
+    description: "Smoke test: Upload and sync 50KB"
+    valuesFile: "staging/smoke-50.yaml"
+    wait: false
+  smoke-110:
+    tillerNamespace: "staging"
+    namespace: "staging"
+    enabled: true
+    chart: "ethersphere/smoke"
+    version: "0.0.1"
+    description: "Smoke test: Upload and sync 110KB"
+    valuesFile: "staging/smoke-110.yaml"
+    wait: false
