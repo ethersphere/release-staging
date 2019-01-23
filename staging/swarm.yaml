@@ -7,7 +7,7 @@ swarm:
   image:
     repository: ethdevops/swarm
     tag: edge
-  replicaCount: 20
+  replicaCount: 21
   config:
     ens_api: http://mainnet-geth-geth.geth:8545
     verbosity: 4
