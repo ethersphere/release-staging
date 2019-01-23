@@ -15,7 +15,7 @@ swarm:
   image:
     repository: ethdevops/swarm
     tag: anton
-  replicaCount: 200
+  replicaCount: 100
   podManagementPolicy: Parallel
   resources:
     requests:
@@ -31,6 +31,10 @@ swarm:
     maxpeers: 2000
     storesize: 300000
     bzznetworkid: 300
+    extraFlags:
+      - --ws
+      - --wsorigins=localhost
+      - --wsapi=admin,debug,pss
   secrets:
     password: qwerty
   persistence:
