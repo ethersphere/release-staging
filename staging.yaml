@@ -23,7 +23,9 @@ apps:
     chart: "ethersphere/swarm"
     version: "0.0.1"
     description: "Swarm staging cluster"
-    valuesFile: "staging/swarm.yaml"
+    valuesFiles:
+      - "staging/swarm.yaml"
+      - "staging/swarm-version.yaml"
     wait: true
     timeout: 600
   smoke-50:
