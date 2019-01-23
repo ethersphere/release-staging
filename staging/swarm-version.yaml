@@ -1,0 +1,4 @@
+swarm:
+  image:
+    repository: ethdevops/swarm
+    tag: edge
