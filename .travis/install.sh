@@ -30,4 +30,4 @@ kubectl config set-context staging --cluster=default --user=staging --namespace=
 
 # Configure helm
 helm init --client-only
-helm plugin install https://github.com/databus23/helm-diff --version master
+helm plugin install https://github.com/databus23/helm-diff --version master --debug
