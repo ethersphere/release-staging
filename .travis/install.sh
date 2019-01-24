@@ -25,9 +25,9 @@ tar xvf "$HOME/.kube/secrets.tar" --directory "$HOME/.kube"
 # Configure kubectl
 kubectl config set-cluster default --server="$KUBECONFIG_URL" --certificate-authority="$HOME/.kube/kubernetes.ca.crt"
 
-kubectl config set-credentials staging --token="$(cat $HOME/.kube/staging.token)" &> /dev/null
+kubectl config set-credentials staging --token="$(cat ${HOME}/.kube/staging.token)" &> /dev/null
 kubectl config set-context staging --cluster=default --user=staging --namespace=staging
 
 # Configure helm
 helm init --client-only
-helm plugin install https://github.com/databus23/helm-diff --version v2.11.0+3 --debug
+helm plugin install https://github.com/databus23/helm-diff --version "$HELM_DIFF_PLUGIN_VERSION"
