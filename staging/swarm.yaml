@@ -12,6 +12,9 @@ swarm:
     maxpeers: 25
     bzznetworkid: 3
     storesize: "5000000" # 5000000 * 4KB = 20GB
+    extraFlags:
+      - --ws
+      - --wsorigins=localhost
   secrets:
     password: qwerty
   ingress:
