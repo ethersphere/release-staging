@@ -2,6 +2,10 @@ language: generic
 dist: xenial
 sudo: false
 
+branches:
+  only:
+  - master
+
 env:
   global:
   - KUBECTL_VERSION=1.10.3
