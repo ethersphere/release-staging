@@ -5,6 +5,7 @@ smoke:
     swarmReplicas: 5
     target: "swarm"
     operation: "upload_and_sync"
+    influxdbEndpoint: "http://swarm-staging-influxdb:8086"
     extraFlags:
       - --single
       - --filesize=110
