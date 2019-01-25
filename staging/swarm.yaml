@@ -47,3 +47,17 @@ influxdb:
     enabled: true
     size: 40Gi
     storageClass: gp2
+
+grafana:
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+      - name: metrics
+        type: influxdb
+        url: http://swarm-staging-influxdb:8086
+        database: metrics
+        user: swarm
+        password: swarm
+        access: proxy
+        isDefault: true
