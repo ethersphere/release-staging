@@ -7,7 +7,6 @@ swarm:
   podManagementPolicy: Parallel
   updateStrategy:
     type: "OnDelete"
-  replicaCount: 21
   config:
     ens_api: http://mainnet-geth-geth.geth:8545
     verbosity: 4

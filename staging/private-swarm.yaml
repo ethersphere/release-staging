@@ -1,0 +1,71 @@
+swarm:
+  metricsEnabled: true
+  tracingEnabled: false
+  profilingEnabled: false
+  terminationGracePeriodSeconds: 5
+  imagePullPolicy: IfNotPresent
+  podManagementPolicy: Parallel
+  updateStrategy:
+    type: "OnDelete"
+  replicaCount: 30
+  config:
+    ens_api: http://mainnet-geth-geth.geth:8545
+    verbosity: 4
+    debug: true
+    maxpeers: 25
+    bzznetworkid: 3
+    storesize: "5000000" # 5000000 * 4KB = 20GB
+    extraFlags:
+      - --ws
+      - --wsaddr=0.0.0.0
+      - --wsorigins=localhost
+      - --wsapi=admin,net,debug
+  secrets:
+    password: qwerty
+  ingress:
+    domain: stg.swarm-gateways.net
+    enabled: true
+    tls:
+      enabled: true
+      acmeEnabled: false
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-body-size: 500m
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+  persistence:
+    enabled: true
+    size: 30Gi
+    storageClass: gp2
+  resources:
+    requests:
+      memory: 512Mi
+      cpu: 0.1
+    limits:
+      memory: 1024Mi
+      cpu: 0.3
+
+influxdb:
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 0.1
+    limits:
+      memory: 8Gi
+      cpu: 4
+  persistence:
+    enabled: true
+    size: 40Gi
+    storageClass: gp2
+
+grafana:
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+      - name: metrics
+        type: influxdb
+        url: http://swarm-private-influxdb:8086
+        database: metrics
+        user: swarm
+        password: swarm
+        access: proxy
+        isDefault: true

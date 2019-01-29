@@ -1,13 +1,11 @@
 smoke:
   schedule: "*/5 * * * *"
   config:
-    name: "upload-sync-50-21-30"
-    swarmReplicas: 21
+    name: "upload-sync-110-30"
     target: "swarm-staging"
     operation: "upload_and_sync"
     influxdbEndpoint: "http://swarm-staging-influxdb:8086"
     extraFlags:
       - --single
-      - --filesize=50
+      - --filesize=110
       - --sync-delay=30
-
