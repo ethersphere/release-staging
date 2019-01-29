@@ -21,7 +21,7 @@ apps:
     namespace: "staging"
     enabled: true
     chart: "ethersphere/swarm"
-    version: "0.0.1"
+    version: "0.0.2"
     description: "Swarm staging cluster"
     valuesFiles:
       - "staging/swarm.yaml"
