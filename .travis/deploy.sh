@@ -18,5 +18,5 @@ kubectl config use-context staging
 NEW_VERSION=$(kubectl -n staging get sts swarm-staging -o jsonpath="{.metadata.resourceVersion}")
 
 if [ "$OLD_VERSION" != "$NEW_VERSION" ]; then
-  kubectl -n staging get pods -l release=swarm-staging,app=swarm,component=swarm
+  kubectl -n staging delete pods -l release=swarm-staging,app=swarm,component=swarm
 fi
