@@ -3,7 +3,10 @@ swarm:
   tracingEnabled: false
   profilingEnabled: false
   terminationGracePeriodSeconds: 5
+  imagePullPolicy: IfNotPresent
   podManagementPolicy: Parallel
+  updateStrategy:
+    type: "OnDelete"
   replicaCount: 21
   config:
     ens_api: http://mainnet-geth-geth.geth:8545
