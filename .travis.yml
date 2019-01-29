@@ -23,3 +23,11 @@ deploy:
   script: PATH=$(pwd)/bin/:$PATH .travis/deploy.sh
   on:
     branch: master
+
+notifications:
+  email:
+    recipients:
+      - anton@ethereum.org
+      - rafael@ethereum.org
+    on_success: never
+    on_failure: always
