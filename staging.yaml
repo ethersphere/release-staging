@@ -20,7 +20,7 @@ apps:
   public-swarm:
     tillerNamespace: "staging"
     namespace: "staging"
-    name: "swarm-staging"
+    name: "swarm-public"
     enabled: true
     chart: "ethersphere/swarm"
     version: "0.0.2"
@@ -35,7 +35,7 @@ apps:
   public-smoke-50:
     tillerNamespace: "staging"
     namespace: "staging"
-    name: "smoke-50"
+    name: "public-smoke-50"
     enabled: true
     chart: "ethersphere/smoke"
     version: "0.0.1"
@@ -47,7 +47,7 @@ apps:
   public-smoke-110:
     tillerNamespace: "staging"
     namespace: "staging"
-    name: "smoke-110"
+    name: "public-smoke-110"
     enabled: true
     chart: "ethersphere/smoke"
     version: "0.0.1"
@@ -68,6 +68,7 @@ apps:
     valuesFiles:
       - "staging/private-swarm.yaml"
       - "staging/swarm-version.yaml"
+      - "staging/swarm-bootnode-version.yaml"
     set:
       swarm.replicaCount: "$STAGING_PRIVATE_REPLICAS"
     wait: true
