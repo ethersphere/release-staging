@@ -62,7 +62,7 @@ grafana:
       datasources:
       - name: metrics
         type: influxdb
-        url: http://swarm-staging-influxdb:8086
+        url: http://swarm-public-influxdb:8086
         database: metrics
         user: swarm
         password: swarm
