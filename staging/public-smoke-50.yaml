@@ -2,7 +2,8 @@ smoke:
   schedule: "*/5 * * * *"
   config:
     name: "upload-sync-50-30"
-    target: "swarm-public"
+    prefix: "swarm-public"
+    suffix: "swarm-public-headless"
     operation: "upload_and_sync"
     influxdbEndpoint: "http://swarm-public-influxdb:8086"
     extraFlags:
