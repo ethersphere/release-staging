@@ -18,7 +18,7 @@ swarm:
       - --ws
       - --wsaddr=0.0.0.0
       - --wsorigins=localhost
-      - --wsapi=admin,net,debug
+      - --wsapi=admin,net,debug,bzz
   secrets:
     password: qwerty
   ingress:
