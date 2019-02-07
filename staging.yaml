@@ -38,7 +38,7 @@ apps:
     name: "public-smoke-50"
     enabled: true
     chart: "ethersphere/smoke"
-    version: "0.0.1"
+    version: "0.0.2"
     description: "(Public) Smoke test: Upload and sync 50KB"
     valuesFile: "staging/public-smoke-50.yaml"
     set:
@@ -50,7 +50,7 @@ apps:
     name: "public-smoke-110"
     enabled: true
     chart: "ethersphere/smoke"
-    version: "0.0.1"
+    version: "0.0.2"
     description: "(Public) Smoke test: Upload and sync 110KB"
     valuesFile: "staging/public-smoke-110.yaml"
     set:
@@ -79,7 +79,7 @@ apps:
     name: "private-smoke-50"
     enabled: true
     chart: "ethersphere/smoke"
-    version: "0.0.1"
+    version: "0.0.2"
     description: "(Private) Smoke test: Upload and sync 50KB"
     valuesFile: "staging/private-smoke-50.yaml"
     set:
@@ -91,7 +91,7 @@ apps:
     name: "private-smoke-110"
     enabled: true
     chart: "ethersphere/smoke"
-    version: "0.0.1"
+    version: "0.0.2"
     description: "(Private) Smoke test: Upload and sync 110KB"
     valuesFile: "staging/private-smoke-110.yaml"
     set:
