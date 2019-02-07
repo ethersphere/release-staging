@@ -10,3 +10,4 @@ smoke:
       - --single
       - --filesize=50
       - --sync-delay=30
+      - --http-port=8500
