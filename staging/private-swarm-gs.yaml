@@ -19,6 +19,7 @@ swarm:
       - --wsaddr=0.0.0.0
       - --wsorigins=localhost
       - --wsapi=admin,net,debug,bzz
+      - --globalstore-api=ws://swarm-private-global-store-swarm-global-store:3033
   secrets:
     password: qwerty
   ingress:
@@ -62,7 +63,7 @@ grafana:
       datasources:
       - name: metrics
         type: influxdb
-        url: http://swarm-private-influxdb:8086
+        url: http://swarm-private-gs-influxdb:8086
         database: metrics
         user: swarm
         password: swarm
