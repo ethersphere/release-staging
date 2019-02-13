@@ -97,3 +97,44 @@ apps:
     set:
       smoke.config.swarmReplicas: "$STAGING_PRIVATE_REPLICAS"
     wait: false
+  # Private cluster with global-store
+  private-global-store:
+    tillerNamespace: "staging"
+    namespace: "staging"
+    name: "swarm-private-global-store"
+    enabled: true
+    chart: "ethersphere/swarm-global-store"
+    version: "0.0.1"
+    description: "(Private) Swarm global store"
+    valuesFiles:
+      - "staging/private-global-store.yaml"
+    wait: true
+    priority: -3
+  private-swarm-gs:
+    tillerNamespace: "staging"
+    namespace: "staging"
+    name: "swarm-private-gs"
+    enabled: true
+    chart: "ethersphere/swarm-private"
+    version: "0.0.2"
+    description: "(Private) Swarm staging cluster using global-store"
+    valuesFiles:
+      - "staging/private-swarm-gs.yaml"
+      - "staging/swarm-version.yaml"
+      - "staging/swarm-bootnode-version.yaml"
+    set:
+      swarm.replicaCount: "$STAGING_PRIVATE_GS_REPLICAS"
+    wait: true
+    timeout: 600
+  private-smoke-gs-110:
+    tillerNamespace: "staging"
+    namespace: "staging"
+    name: "private-smoke-gs-110"
+    enabled: true
+    chart: "ethersphere/smoke"
+    version: "0.0.2"
+    description: "(Private) Smoke test: Upload and sync 110KB"
+    valuesFile: "staging/private-smoke-gs-110.yaml"
+    set:
+      smoke.config.swarmReplicas: "$STAGING_PRIVATE_GS_REPLICAS"
+    wait: false
