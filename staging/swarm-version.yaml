@@ -1,4 +1,4 @@
 swarm:
   image:
     repository: ethdevops/swarm
-    tag: rafael@sha256:47b564d3c0b4b3bc20f85a0350927a80174b1c67943c210d95e62e931e70088a
+    tag: rafael@sha256:8b425a0046c985be50d97956ea570de34e495f8cb1dd4d7c1d2602fb705411d0
