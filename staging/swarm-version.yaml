@@ -1,4 +1,4 @@
 swarm:
   image:
     repository: ethdevops/swarm
-    tag: edge@sha256:d39e70190e4a3200287deacca1b4be0e52f4463715f69ef97393e42fccaf90f0
+    tag: edge@sha256:e78882d137348b64814309ce174939d6b3c598b72703a9fdd30c8ee2cb950d4d
