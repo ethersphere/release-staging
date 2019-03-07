@@ -1,6 +1,6 @@
 swarm:
   metricsEnabled: true
-  tracingEnabled: false
+  tracingEnabled: true
   profilingEnabled: false
   terminationGracePeriodSeconds: 5
   imagePullPolicy: IfNotPresent
