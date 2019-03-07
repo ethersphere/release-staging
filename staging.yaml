@@ -73,27 +73,27 @@ apps:
       swarm.replicaCount: "$STAGING_PRIVATE_REPLICAS"
     wait: true
     timeout: 600
-  private-smoke-50:
+  private-smoke-a:
     tillerNamespace: "staging"
     namespace: "staging"
-    name: "private-smoke-50"
+    name: "private-smoke-a"
     enabled: true
     chart: "ethersphere/smoke"
     version: "0.0.2"
-    description: "(Private) Smoke test: Upload and sync 50KB"
-    valuesFile: "staging/private-smoke-50.yaml"
+    description: "(Private) Smoke test: Upload and sync - A"
+    valuesFile: "staging/private-smoke-a.yaml"
     set:
       smoke.config.swarmReplicas: "$STAGING_PRIVATE_REPLICAS"
     wait: false
-  private-smoke-110:
+  private-smoke-b:
     tillerNamespace: "staging"
     namespace: "staging"
-    name: "private-smoke-110"
+    name: "private-smoke-b"
     enabled: true
     chart: "ethersphere/smoke"
     version: "0.0.2"
-    description: "(Private) Smoke test: Upload and sync 110KB"
-    valuesFile: "staging/private-smoke-110.yaml"
+    description: "(Private) Smoke test: Upload and sync - B"
+    valuesFile: "staging/private-smoke-b.yaml"
     set:
       smoke.config.swarmReplicas: "$STAGING_PRIVATE_REPLICAS"
     wait: false
