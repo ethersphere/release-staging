@@ -43,6 +43,9 @@ swarm:
       cpu: 0.7
 
 influxdb:
+  image:
+    repo: "influxdb"
+    tag: "1.7.4"
   resources:
     requests:
       memory: 256Mi
