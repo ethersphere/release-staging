@@ -67,7 +67,7 @@ apps:
     description: "(Private) Swarm staging cluster"
     valuesFiles:
       - "staging/private-swarm.yaml"
-      - "staging/swarm-private-version.yaml"
+      - "staging/swarm-version.yaml"
       - "staging/swarm-bootnode-version.yaml"
     set:
       swarm.replicaCount: "$STAGING_PRIVATE_REPLICAS"
