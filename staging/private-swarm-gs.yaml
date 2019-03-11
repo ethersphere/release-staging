@@ -1,3 +1,17 @@
+bootnode:
+  persistence:
+    enabled: true
+    storageClass: "gp2"
+    accessMode: ReadWriteOnce
+    size: 1Gi
+  resources:
+    requests:
+      memory: 512Mi
+      cpu: 0.1
+    limits:
+      memory: 1024Mi
+      cpu: 0.3
+
 swarm:
   metricsEnabled: true
   tracingEnabled: false
