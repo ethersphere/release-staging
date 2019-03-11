@@ -15,7 +15,7 @@ tar xzfv "helm-v${HELM_VERSION}-linux-amd64.tar.gz"
 mv "$(pwd)/linux-amd64/helm" "$BIN_DIR/helm"
 
 # Install helmsman
-curl -L https://github.com/Praqma/helmsman/releases/download/v1.7.3-rc/helmsman_1.7.3-rc_linux_amd64.tar.gz | tar zx --directory "$BIN_DIR"
+curl -L "https://github.com/Praqma/helmsman/releases/download/v${HELMSMAN_VERSION}/Helmsman_${HELMSMAN_VERSION}_linux_amd64.tar.gz" | tar zx --directory "$BIN_DIR"
 
 # Decrypt secrets
 mkdir "$HOME/.kube"
