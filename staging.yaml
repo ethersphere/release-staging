@@ -9,6 +9,13 @@ namespaces:
     installTiller: true
     labels:
       env: "staging"
+    limits:
+      default:
+        cpu: "300m"
+        memory: "300Mi"
+      defaultRequest:
+        cpu: "300m"
+        memory: "300Mi"
 
 helmRepos:
   stable: "https://kubernetes-charts.storage.googleapis.com"
