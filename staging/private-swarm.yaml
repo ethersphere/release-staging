@@ -1,7 +1,7 @@
 swarm:
   metricsEnabled: true
   tracingEnabled: true
-  profilingEnabled: false
+  profilingEnabled: true
   terminationGracePeriodSeconds: 5
   imagePullPolicy: IfNotPresent
   podManagementPolicy: Parallel
