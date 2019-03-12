@@ -1,24 +1,26 @@
 swarm:
   metricsEnabled: true
-  tracingEnabled: false
-  profilingEnabled: false
+  tracingEnabled: true
+  profilingEnabled: true
   terminationGracePeriodSeconds: 5
   imagePullPolicy: IfNotPresent
   podManagementPolicy: Parallel
   updateStrategy:
     type: "OnDelete"
   config:
-    ens_api: http://mainnet-geth-geth.geth:8545
+    ens_api: "eth:314159265dD8dbb310642f98f50C066173C1259b@http://mainnet-geth-geth.geth:8545"
     verbosity: 4
     debug: true
     maxpeers: 25
-    bzznetworkid: 3
-    storesize: "5000000" # 5000000 * 4KB = 20GB
+    bzznetworkid: 125
+    storesize: "20000" # 20000 * 4KB = 80MB
     extraFlags:
       - --ws
+      - --ens-api=test:112234455c3a32fd11230c42e7bccd4a84e02010@http://ropsten-geth-geth.geth:8545
       - --wsaddr=0.0.0.0
-      - --wsorigins=localhost
+      - --wsorigins=*
       - --wsapi=admin,net,debug,bzz
+      - --store.cache.size=1000
   secrets:
     password: qwerty
   ingress:
@@ -31,18 +33,19 @@ swarm:
       nginx.ingress.kubernetes.io/proxy-body-size: 500m
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
   persistence:
-    enabled: true
-    size: 30Gi
-    storageClass: gp2
+    enabled: false
   resources:
     requests:
       memory: 512Mi
-      cpu: 0.1
+      cpu: 1
     limits:
       memory: 1024Mi
-      cpu: 0.3
+      cpu: 2
 
 influxdb:
+  image:
+    repo: "influxdb"
+    tag: "1.7.4"
   resources:
     requests:
       memory: 256Mi
@@ -51,9 +54,12 @@ influxdb:
       memory: 8Gi
       cpu: 4
   persistence:
-    enabled: true
-    size: 40Gi
-    storageClass: gp2
+    enabled: false
+  config:
+    meta:
+      logging_enabled: true
+    data:
+      trace_logging_enabled: true
 
 grafana:
   datasources:
@@ -68,3 +74,12 @@ grafana:
         password: swarm
         access: proxy
         isDefault: true
+
+jaeger:
+  resources:
+    requests:
+      memory: 2000Mi
+      cpu: 1
+    limits:
+      memory: 5000Mi
+      cpu: 2

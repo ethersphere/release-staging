@@ -1,0 +1,62 @@
+settings:
+  # Name of the service account within each namespace that should be used for tiller
+  serviceAccount: "tiller"
+
+namespaces:
+  kube-system:
+  tony:
+    protected: false
+    installTiller: true
+    labels:
+      env: "tony"
+
+helmRepos:
+  stable: "https://kubernetes-charts.storage.googleapis.com"
+  incubator: "http://storage.googleapis.com/kubernetes-charts-incubator"
+  ethersphere: "https://raw.githubusercontent.com/ethersphere/helm-charts-artifacts/master/"
+
+apps:
+  # Private cluster
+  private-swarm:
+    tillerNamespace: "tony"
+    namespace: "tony"
+    name: "swarm-private"
+    enabled: true
+    chart: "ethersphere/swarm-private"
+    version: "0.0.2"
+    description: "(Private) Swarm tony cluster"
+    valuesFiles:
+      - "tony/private-swarm.yaml"
+      - "tony/version.yaml"
+    set:
+      swarm.replicaCount: "$TONY_PRIVATE_REPLICAS"
+    wait: true
+    timeout: 600
+  private-smoke-4:
+    tillerNamespace: "tony"
+    namespace: "tony"
+    name: "private-smoke-4"
+    enabled: true
+    chart: "ethersphere/smoke"
+    version: "0.0.2"
+    description: "(Private) Smoke test: Upload and sync 4MB"
+    valuesFiles:
+      - "tony/private-smoke-4.yaml"
+      - "tony/version.yaml"
+    set:
+      smoke.config.swarmReplicas: "$TONY_PRIVATE_REPLICAS"
+    wait: false
+  private-smoke-3:
+    tillerNamespace: "tony"
+    namespace: "tony"
+    name: "private-smoke-6"
+    enabled: true
+    chart: "ethersphere/smoke"
+    version: "0.0.2"
+    description: "(Private) Smoke test: Upload and sync 3MB"
+    valuesFiles:
+      - "tony/private-smoke-6.yaml"
+      - "tony/version.yaml"
+    set:
+      smoke.config.swarmReplicas: "$TONY_PRIVATE_REPLICAS"
+    wait: false

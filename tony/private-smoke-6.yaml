@@ -1,13 +1,13 @@
 smoke:
-  schedule: "*/5 * * * *"
+  schedule: "* * * * *"
   config:
-    name: "upload-sync-110-30"
+    name: "upload-sync-6"
     prefix: "swarm-private"
     suffix: "swarm-private-headless"
     operation: "upload_and_sync"
     influxdbEndpoint: "http://swarm-private-influxdb:8086"
     extraFlags:
       - --single
-      - --filesize=110
-      - --sync-delay=30
+      - --filesize=6000
+      - --sync-delay=15
       - --http-port=8500
