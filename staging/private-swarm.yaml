@@ -26,13 +26,14 @@ swarm:
   updateStrategy:
     type: "OnDelete"
   config:
-    ens_api: http://mainnet-geth-geth.geth:8545
+    ens_api: "eth:314159265dD8dbb310642f98f50C066173C1259b@http://mainnet-geth-geth.geth:8545"
     verbosity: 4
     debug: true
     maxpeers: 25
     bzznetworkid: 323
     storesize: "5000000" # 5000000 * 4KB = 20GB
     extraFlags:
+      - --ens-api=test:112234455c3a32fd11230c42e7bccd4a84e02010@http://ropsten-geth-geth.geth:8545
       - --ws
       - --wsaddr=0.0.0.0
       - --wsorigins=localhost
