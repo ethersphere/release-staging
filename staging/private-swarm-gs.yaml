@@ -16,7 +16,7 @@ bootnode:
       cpu: 0.3
 
 swarm:
-  metricsEnabled: true
+  metricsEnabled: false
   tracingEnabled: false
   profilingEnabled: false
   terminationGracePeriodSeconds: 5
