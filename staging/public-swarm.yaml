@@ -58,6 +58,55 @@ influxdb:
     size: 40Gi
     storageClass: gp2
 
+kapacitor:
+  persistence:
+    enabled: true
+    storageClass: "gp2"
+    accessMode: ReadWriteOnce
+    size: 8Gi
+  resources:
+    requests:
+      memory: 512Mi
+      cpu: 0.4
+    limits:
+      memory: 512Mi
+      cpu: 0.4
+  envVars:
+    KAPACITOR_LOGGING_LEVEL: "INFO"
+  influxURL: http://swarm-public-influxdb:8086
+
+kapacitor-importer:
+  kapacitorURL: http://swarm-public-kapacitor:9092
+  batchScripts:
+    # Upload and sync failed too often
+    smoke_upload_and_sync.tick: |-
+      dbrp "metrics"."autogen"
+      batch
+          |query('''
+              SELECT count("value")
+              FROM "metrics"."autogen"."swarm-smoke.upload-and-sync.fail.count"
+          ''')
+              .period(1h)
+              .every(1h)
+          |alert()
+              .crit(lambda: "count" >= 4)
+              .message('[Public] Smoke - Upload and sync failed {{index .Fields "count"}} times in the last hour')
+              .log('/var/lib/kapacitor/alerts.log')
+    # Fetching a file is taking too long
+    smoke_fetch_download_time.tick: |-
+      dbrp "metrics"."autogen"
+      batch
+          |query('''
+              SELECT mean("max") / 1000000000
+              FROM "metrics"."autogen"."swarm-smoke.upload-and-sync.single.fetch-time.span"
+          ''')
+              .period(1h)
+              .every(1h)
+          |alert()
+              .crit(lambda: "mean" >= 60)
+              .message('[Public] Smoke - Fetch took {{index .Fields "mean"}}s on average over the last hour')
+              .log('/var/lib/kapacitor/alerts.log')
+
 grafana:
   datasources:
     datasources.yaml:
