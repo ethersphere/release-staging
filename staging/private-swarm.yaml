@@ -10,10 +10,10 @@ bootnode:
   resources:
     requests:
       memory: 512Mi
-      cpu: 0.1
+      cpu: 1
     limits:
       memory: 1024Mi
-      cpu: 0.3
+      cpu: 1
 
 
 swarm:
@@ -56,10 +56,10 @@ swarm:
   resources:
     requests:
       memory: 512Mi
-      cpu: 0.1
+      cpu: 1
     limits:
       memory: 1024Mi
-      cpu: 0.3
+      cpu: 1
 
 influxdb:
   image:
@@ -68,7 +68,7 @@ influxdb:
   resources:
     requests:
       memory: 256Mi
-      cpu: 0.1
+      cpu: 1
     limits:
       memory: 8Gi
       cpu: 4
