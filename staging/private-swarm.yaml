@@ -108,7 +108,7 @@ kapacitor-importer:
               .every(1h)
           |alert()
               .crit(lambda: "count" >= 3)
-              .message('Smoke - Upload and sync failed {{index .Fields "count"}} times in the last hour')
+              .message('[Private] Smoke - Upload and sync failed {{index .Fields "count"}} times in the last hour')
               .log('/var/lib/kapacitor/alerts.log')
     # Fetching a file is taking too long
     smoke_fetch_download_time.tick: |-
@@ -122,7 +122,7 @@ kapacitor-importer:
               .every(1h)
           |alert()
               .crit(lambda: "mean" >= 20)
-              .message('Smoke - Fetch took {{index .Fields "mean"}}s on average over the last hour')
+              .message('[Private] Smoke - Fetch took {{index .Fields "mean"}}s on average over the last hour')
               .log('/var/lib/kapacitor/alerts.log')
 
 grafana:
