@@ -46,7 +46,7 @@ apps:
     set:
       smoke.config.swarmReplicas: "$TONY_PRIVATE_REPLICAS"
     wait: false
-  private-smoke-3:
+  private-smoke-6:
     tillerNamespace: "tony"
     namespace: "tony"
     name: "private-smoke-6"

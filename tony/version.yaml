@@ -1,14 +1,14 @@
 smoke:
   image:
     repository: ethdevops/swarm-smoke
-    tag: anton@sha256:c1aba2962452ea434a8ac8c934951d504c3c95179c2679c6ffb3ad553fe6ca1e
+    tag: anton@sha256:b0d753aa1649a33074f8d844b561d542e3b93d1b4fecbbbf9340dcdc619447f3
 
 swarm:
   image:
     repository: ethdevops/swarm
-    tag: anton@sha256:6532c9a506729ea15a4b395b60abacffbc766b063a9f965e13aaa7710436129d
+    tag: anton@sha256:f88bf4719510cd95959417578810fb007e36a0190b7d10aa6865a2df7cd031a0
 
 bootnode:
   image:
     repository: ethdevops/swarm
-    tag: anton@sha256:6532c9a506729ea15a4b395b60abacffbc766b063a9f965e13aaa7710436129d
+    tag: anton@sha256:f88bf4719510cd95959417578810fb007e36a0190b7d10aa6865a2df7cd031a0

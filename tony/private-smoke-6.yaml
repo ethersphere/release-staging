@@ -9,5 +9,5 @@ smoke:
     extraFlags:
       - --single
       - --filesize=6000
-      - --sync-delay=15
+      - --sync-delay=30
       - --http-port=8500
