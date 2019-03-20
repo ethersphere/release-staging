@@ -38,10 +38,10 @@ swarm:
   resources:
     requests:
       memory: 512Mi
-      cpu: 0.7
+      cpu: 1.2
     limits:
       memory: 1024Mi
-      cpu: 0.7
+      cpu: 1.2
 
 influxdb:
   image:
@@ -113,11 +113,11 @@ grafana:
     datasources.yaml:
       apiVersion: 1
       datasources:
-      - name: metrics
-        type: influxdb
-        url: http://swarm-public-influxdb:8086
-        database: metrics
-        user: swarm
-        password: swarm
-        access: proxy
-        isDefault: true
+        - name: metrics
+          type: influxdb
+          url: http://swarm-public-influxdb:8086
+          database: metrics
+          user: swarm
+          password: swarm
+          access: proxy
+          isDefault: true
