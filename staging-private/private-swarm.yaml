@@ -15,7 +15,6 @@ bootnode:
       memory: 1024Mi
       cpu: 1
 
-
 swarm:
   metricsEnabled: true
   tracingEnabled: true
@@ -52,7 +51,7 @@ swarm:
   persistence:
     enabled: true
     size: 30Gi
-    storageClass: gp2
+    storageClass: gp2-delete
   resources:
     requests:
       memory: 512Mi
@@ -131,11 +130,11 @@ grafana:
     datasources.yaml:
       apiVersion: 1
       datasources:
-      - name: metrics
-        type: influxdb
-        url: http://swarm-private-influxdb:8086
-        database: metrics
-        user: swarm
-        password: swarm
-        access: proxy
-        isDefault: true
+        - name: metrics
+          type: influxdb
+          url: http://swarm-private-influxdb:8086
+          database: metrics
+          user: swarm
+          password: swarm
+          access: proxy
+          isDefault: true
