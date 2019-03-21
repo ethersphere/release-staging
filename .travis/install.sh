@@ -28,6 +28,9 @@ kubectl config set-cluster default --server="$KUBECONFIG_URL" --certificate-auth
 kubectl config set-credentials staging --token="$(cat ${HOME}/.kube/staging.token)" &> /dev/null
 kubectl config set-context staging --cluster=default --user=staging --namespace=staging
 
+kubectl config set-credentials staging-private --token="$(cat ${HOME}/.kube/staging-private.token)" &> /dev/null
+kubectl config set-context staging-private --cluster=default --user=staging-private --namespace=staging-private
+
 # Configure helm
 helm init --client-only
 helm plugin install https://github.com/databus23/helm-diff --version "$HELM_DIFF_PLUGIN_VERSION"
