@@ -11,3 +11,4 @@ smoke:
       - --filesize=50
       - --sync-delay=30
       - --http-port=8500
+      - --verbosity=4
