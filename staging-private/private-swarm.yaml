@@ -4,7 +4,7 @@ networkPolicy:
 bootnode:
   persistence:
     enabled: true
-    storageClass: "gp2"
+    storageClass: gp2-delete
     accessMode: ReadWriteOnce
     size: 1Gi
   resources:
@@ -74,12 +74,12 @@ influxdb:
   persistence:
     enabled: true
     size: 40Gi
-    storageClass: gp2
+    storageClass: gp2-delete
 
 kapacitor:
   persistence:
     enabled: true
-    storageClass: "gp2"
+    storageClass: gp2-delete
     accessMode: ReadWriteOnce
     size: 8Gi
   resources:
