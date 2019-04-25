@@ -1,4 +1,4 @@
 bootnode:
   image:
     repository: ethdevops/swarm
-    tag: edge@sha256:2d07a2b04ba026695ac3907fdd25f8153a59b4f12a55f90bee7ea3ae17ec653a
+    tag: edge@sha256:1245b82d725ec0844c75d845783cd7633259a9abda81086e97a3066e7d5996f1
