@@ -23,6 +23,7 @@ apps:
     name: "swarm-private"
     enabled: true
     chart: "ethersphere/swarm-private"
+    #chart: "/home/nonsense/code/helm-charts/artifacts/swarm-private-0.0.2.tgz"
     version: "0.0.2"
     description: "(Private) Swarm tony cluster"
     valuesFiles:
@@ -32,31 +33,31 @@ apps:
       swarm.replicaCount: "$TONY_PRIVATE_REPLICAS"
     wait: true
     timeout: 600
-  private-smoke-4:
-    tillerNamespace: "tony"
-    namespace: "tony"
-    name: "private-smoke-4"
-    enabled: true
-    chart: "ethersphere/smoke"
-    version: "0.0.2"
-    description: "(Private) Smoke test: Upload and sync 4MB"
-    valuesFiles:
-      - "tony/private-smoke-4.yaml"
-      - "tony/version.yaml"
-    set:
-      smoke.config.swarmReplicas: "$TONY_PRIVATE_REPLICAS"
-    wait: false
-  private-smoke-6:
-    tillerNamespace: "tony"
-    namespace: "tony"
-    name: "private-smoke-6"
-    enabled: true
-    chart: "ethersphere/smoke"
-    version: "0.0.2"
-    description: "(Private) Smoke test: Upload and sync 3MB"
-    valuesFiles:
-      - "tony/private-smoke-6.yaml"
-      - "tony/version.yaml"
-    set:
-      smoke.config.swarmReplicas: "$TONY_PRIVATE_REPLICAS"
-    wait: false
+  #private-smoke-a:
+    #tillerNamespace: "tony"
+    #namespace: "tony"
+    #name: "private-smoke-a"
+    #enabled: true
+    #chart: "ethersphere/smoke"
+    #version: "0.0.2"
+    #description: "(Private) Smoke test: Upload and sync"
+    #valuesFiles:
+      #- "tony/private-smoke-a.yaml"
+      #- "tony/version.yaml"
+    #set:
+      #smoke.config.swarmReplicas: "$TONY_PRIVATE_REPLICAS"
+    #wait: false
+  #private-smoke-only-upload:
+    #tillerNamespace: "tony"
+    #namespace: "tony"
+    #name: "private-smoke-only-upload"
+    #enabled: true
+    #chart: "ethersphere/smoke"
+    #version: "0.0.2"
+    #description: "(Private) Smoke test: Only Upload"
+    #valuesFiles:
+      #- "tony/private-smoke-only-upload.yaml"
+      #- "tony/version.yaml"
+    #set:
+      #smoke.config.swarmReplicas: "$TONY_PRIVATE_REPLICAS"
+    #wait: false

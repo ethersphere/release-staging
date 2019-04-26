@@ -1,22 +1,34 @@
 bootnode:
+  terminationGracePeriodSeconds: 3
+  updateStrategy:
+    type: "OnDelete"
   persistence:
-    enabled: true
+    enabled: false
     storageClass: "gp2-delete"
     accessMode: ReadWriteOnce
     size: 1Gi
   resources:
     requests:
       memory: 512Mi
-      cpu: 1
+      cpu: 0.3
     limits:
       memory: 1024Mi
-      cpu: 1
+      cpu: 0.3
+  #nodeSelector:
+    #nospot: "true"
+  #tolerations:
+    #- key: "nospot"
+      #operator: "Exists"
+      #effect: "NoSchedule"
+    #- key: "nospot"
+      #operator: "Exists"
+      #effect: "NoExecute"
 
 swarm:
   metricsEnabled: true
   tracingEnabled: true
   profilingEnabled: true
-  terminationGracePeriodSeconds: 5
+  terminationGracePeriodSeconds: 3
   imagePullPolicy: IfNotPresent
   podManagementPolicy: Parallel
   updateStrategy:
@@ -27,7 +39,7 @@ swarm:
     debug: true
     maxpeers: 40
     bzznetworkid: 125
-    storesize: "20000" # 20000 * 4KB = 80MB
+    storesize: "200000" # 200000 * 4KB = 800MB
     extraFlags:
       - --ws
       - --ens-api=test:112234455c3a32fd11230c42e7bccd4a84e02010@http://ropsten-geth-geth.geth:8545
@@ -35,7 +47,7 @@ swarm:
       - --wsorigins=*
       - --wsapi=admin,net,debug,bzz,stream
       - --store.cache.size=1000
-      - --vmodule=swarm/network/*=5
+      - --vmodule=swarm/network/*=5,swarm/storage/*=4
   secrets:
     password: qwerty
   ingress:
@@ -46,19 +58,38 @@ swarm:
       acmeEnabled: false
     annotations:
       nginx.ingress.kubernetes.io/proxy-body-size: 500m
+      nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+      nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
   persistence:
-    enabled: true
+    enabled: false
     storageClass: "gp2-delete"
     accessMode: ReadWriteOnce
     size: 10Gi
   resources:
     requests:
       memory: 512Mi
-      cpu: 0.5
+      cpu: 0.8
     limits:
-      memory: 1024Mi
-      cpu: 1
+      memory: 850Mi
+      cpu: 1.3
+  tracingAgent:
+    resources:
+      requests:
+        memory: 64Mi
+        cpu: 0.2
+      limits:
+        memory: 64Mi
+        cpu: 0.4
+  #nodeSelector:
+    #nospot: "true"
+  #tolerations:
+    #- key: "nospot"
+      #operator: "Exists"
+      #effect: "NoSchedule"
+    #- key: "nospot"
+      #operator: "Exists"
+      #effect: "NoExecute"
 
 influxdb:
   image:
@@ -72,7 +103,7 @@ influxdb:
       memory: 8Gi
       cpu: 4
   persistence:
-    enabled: false
+    enabled: true
   config:
     meta:
       logging_enabled: true
@@ -92,6 +123,24 @@ grafana:
         password: swarm
         access: proxy
         isDefault: true
+  dashboards:
+    default:
+      smoke:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/smoke.json
+      ldbstore:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/ldbstore.json
+      swarm:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/swarm.json
+      upload-speed:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/upload-speed.json
+      sliding:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/smoke-sliding.json
+      kad:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/kad.json
+      fetchers:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/fetchers.json
+      timeouts:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/timeouts.json
 
 jaeger:
   resources:
@@ -101,3 +150,8 @@ jaeger:
     limits:
       memory: 5000Mi
       cpu: 2
+  config:
+    env:
+      SPAN_STORAGE_TYPE: memory
+    args:
+      - "--memory.max-traces=300000"
