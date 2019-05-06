@@ -1,0 +1,15 @@
+smoke:
+  schedule: "* * * * *"
+  successfulJobsHistoryLimit: 60
+  config:
+    name: "upload-sync-a"
+    prefix: "swarm-private"
+    suffix: "swarm-private-headless"
+    operation: "upload_and_sync"
+    influxdbEndpoint: "http://swarm-private-influxdb:8086"
+    extraFlags:
+      - --filesize=20000
+      - --sync-delay
+      - --timeout=600
+      - --http-port=8500
+      - --verbosity=4
