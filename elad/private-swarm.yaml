@@ -3,7 +3,7 @@ bootnode:
   updateStrategy:
     type: "OnDelete"
   persistence:
-    enabled: false
+    enabled: true
     storageClass: "gp2-delete"
     accessMode: ReadWriteOnce
     size: 1Gi
@@ -39,7 +39,7 @@ swarm:
     debug: true
     maxpeers: 40
     bzznetworkid: 125
-    storesize: "200000" # 200000 * 4KB = 800MB
+    storesize: "15000" # 62mb
     extraFlags:
       - --ws
       - --ens-api=test:112234455c3a32fd11230c42e7bccd4a84e02010@http://ropsten-geth-geth.geth:8545
