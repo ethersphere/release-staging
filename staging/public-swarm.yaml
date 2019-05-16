@@ -12,7 +12,7 @@ swarm:
     verbosity: 4
     debug: true
     maxpeers: 25
-    bzznetworkid: 3
+    bzznetworkid: 4
     storesize: "5000000" # 5000000 * 4KB = 20GB
     extraFlags:
       - --ens-api=test:112234455c3a32fd11230c42e7bccd4a84e02010@http://ropsten-geth-geth.geth:8545
