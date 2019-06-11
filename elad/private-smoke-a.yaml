@@ -8,8 +8,8 @@ smoke:
     operation: "upload_and_sync"
     influxdbEndpoint: "http://swarm-private-influxdb:8086"
     extraFlags:
-      - --filesize=20000
+      - --filesize=100000
       - --sync-delay
-      - --timeout=600
+      - --timeout=6000
       - --http-port=8500
       - --verbosity=4

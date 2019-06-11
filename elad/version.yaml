@@ -1,14 +1,14 @@
 smoke:
   image:
     repository: stolen/swarm-smoke
-    tag: elad@sha256:de94ddb3e599eb4bac9004e5ddd66c357c4c1e08814e216bca09b1899dddebf2
+    tag: elad@sha256:b509ab95acf12d6227dbe469d194c0bbb217f2d7feffa64161e6fa3685bd6a70
 
 swarm:
   image:
     repository: stolen/swarm
-    tag: elad@sha256:8fa56e6789781dcb15bb4965ed2c87e09a8ef698c1fe8bba7b26dc6761a25f9b
+    tag: elad@sha256:3c70c4b9ee24a3839d355c54e5473c8a53fb3af61a8ac92a26ddd49212df11b2
 
 bootnode:
   image:
     repository: stolen/swarm
-    tag: elad@sha256:8fa56e6789781dcb15bb4965ed2c87e09a8ef698c1fe8bba7b26dc6761a25f9b
+    tag: elad@sha256:3c70c4b9ee24a3839d355c54e5473c8a53fb3af61a8ac92a26ddd49212df11b2

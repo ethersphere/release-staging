@@ -39,7 +39,7 @@ swarm:
     debug: true
     maxpeers: 40
     bzznetworkid: 125
-    storesize: "15000" # 62mb
+    storesize: "400000" # 62mb
     extraFlags:
       - --ws
       - --ens-api=test:112234455c3a32fd11230c42e7bccd4a84e02010@http://ropsten-geth-geth.geth:8545
@@ -65,7 +65,7 @@ swarm:
     enabled: false
     storageClass: "gp2-delete"
     accessMode: ReadWriteOnce
-    size: 10Gi
+    size: 3Gi
   resources:
     requests:
       memory: 512Mi
