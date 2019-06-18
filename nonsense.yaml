@@ -1,0 +1,49 @@
+settings:
+  # Name of the service account within each namespace that should be used for tiller
+  serviceAccount: "tiller"
+
+namespaces:
+  kube-system:
+  nonsense:
+    protected: false
+    installTiller: true
+    labels:
+      env: "nonsense"
+
+helmRepos:
+  stable: "https://kubernetes-charts.storage.googleapis.com"
+  incubator: "http://storage.googleapis.com/kubernetes-charts-incubator"
+  ethersphere: "https://raw.githubusercontent.com/ethersphere/helm-charts-artifacts/master/"
+
+apps:
+  # Private cluster
+  private-swarm:
+    tillerNamespace: "nonsense"
+    namespace: "nonsense"
+    name: "swarm-private"
+    enabled: true
+    chart: "ethersphere/swarm-private"
+    #chart: "/home/nonsense/code/helm-charts/artifacts/swarm-private-0.0.2.tgz"
+    version: "0.0.3"
+    description: "(Private) Swarm nonsense cluster"
+    valuesFiles:
+      - "nonsense/private-swarm.yaml"
+      - "nonsense/version.yaml"
+    set:
+      swarm.replicaCount: "$NONSENSE_PRIVATE_REPLICAS"
+    wait: true
+    timeout: 600
+  private-smoke-a:
+    tillerNamespace: "nonsense"
+    namespace: "nonsense"
+    name: "private-smoke-a"
+    enabled: true
+    chart: "ethersphere/smoke"
+    version: "0.0.2"
+    description: "(Private) Smoke test: Upload and sync"
+    valuesFiles:
+      - "nonsense/private-smoke-a.yaml"
+      - "nonsense/version.yaml"
+    set:
+      smoke.config.swarmReplicas: "$NONSENSE_PRIVATE_REPLICAS"
+    wait: false
