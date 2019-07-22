@@ -33,30 +33,16 @@ apps:
       swarm.replicaCount: "$REPLICA_COUNT"
     wait: true
     timeout: 600
-  private-smoke-a:
-    tillerNamespace: "elad"
-    namespace: "elad"
-    name: "private-smoke-a"
-    enabled: true
-    chart: "ethersphere/smoke"
-    version: "0.0.2"
-    description: "(Private) Smoke test: Upload and sync"
-    valuesFiles:
-      - "elad/private-smoke-a.yaml"
-      - "elad/version.yaml"
-    set:
-      smoke.config.swarmReplicas: "$REPLICA_COUNT"
-    wait: false
-  ##private-smoke-only-upload:
+  #private-smoke-a:
     #tillerNamespace: "elad"
     #namespace: "elad"
-    #name: "private-smoke-only-upload"
+    #name: "private-smoke-a"
     #enabled: true
     #chart: "ethersphere/smoke"
     #version: "0.0.2"
-    #description: "(Private) Smoke test: Only Upload"
+    #description: "(Private) Smoke test: Upload and sync"
     #valuesFiles:
-      #- "elad/private-smoke-only-upload.yaml"
+      #- "elad/private-smoke-a.yaml"
       #- "elad/version.yaml"
     #set:
       #smoke.config.swarmReplicas: "$REPLICA_COUNT"
