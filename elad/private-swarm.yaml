@@ -1,19 +1,16 @@
 bootnode:
-  terminationGracePeriodSeconds: 3
-  updateStrategy:
-    type: "OnDelete"
   persistence:
     enabled: true
-    storageClass: "gp2-delete"
+    storageClass: gp2-delete
     accessMode: ReadWriteOnce
     size: 1Gi
   resources:
     requests:
       memory: 512Mi
-      cpu: 0.3
+      cpu: 1
     limits:
       memory: 1024Mi
-      cpu: 0.3
+      cpu: 1
   #nodeSelector:
     #nospot: "true"
   #tolerations:
@@ -28,7 +25,7 @@ swarm:
   metricsEnabled: true
   tracingEnabled: true
   profilingEnabled: true
-  terminationGracePeriodSeconds: 3
+  terminationGracePeriodSeconds: 5
   imagePullPolicy: IfNotPresent
   podManagementPolicy: Parallel
   updateStrategy:
@@ -62,7 +59,7 @@ swarm:
       nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
   persistence:
-    enabled: false
+    enabled: true
     storageClass: "gp2-delete"
     accessMode: ReadWriteOnce
     size: 3Gi
@@ -71,7 +68,7 @@ swarm:
       memory: 512Mi
       cpu: 0.5
     limits:
-      memory: 850Mi
+      memory: 1024Mi
       cpu: 1
   tracingAgent:
     resources:
@@ -103,12 +100,21 @@ influxdb:
       memory: 8Gi
       cpu: 4
   persistence:
-    enabled: false
+    enabled: true
   config:
     meta:
       logging_enabled: true
     data:
       trace_logging_enabled: true
+  #nodeSelector:
+    #nospot: "true"
+  #tolerations:
+    #- key: "nospot"
+      #operator: "Exists"
+      #effect: "NoSchedule"
+    #- key: "nospot"
+      #operator: "Exists"
+      #effect: "NoExecute"
 
 grafana:
   datasources:
