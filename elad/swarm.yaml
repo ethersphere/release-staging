@@ -1,0 +1,177 @@
+bootnode:
+  imagePullPolicy: Always
+  persistence:
+    enabled: false
+    storageClass: gp2-delete
+    accessMode: ReadWriteOnce
+    size: 1Gi
+  image:
+    repository: stolen/swarm
+    #repository: ethersphere/swarm
+    #tag: edge
+    tag: elad@sha256:e8a2baf5724068087f24c6c8680555688a82d96c310479b107585c428bb4cb8a
+  resources:
+    requests:
+      memory: 512Mi
+      cpu: null
+    limits:
+      memory: 1024Mi
+      cpu: null
+  nodeSelector:
+    nospot: "true"
+  tolerations:
+    - key: "nospot"
+      operator: "Exists"
+      effect: "NoSchedule"
+    - key: "nospot"
+      operator: "Exists"
+      effect: "NoExecute"
+
+swarm:
+  metricsEnabled: true
+  tracingEnabled: false
+  profilingEnabled: true
+  replicaCount: 50
+  terminationGracePeriodSeconds: 5
+  imagePullPolicy: Always
+  podManagementPolicy: Parallel
+  image:
+    #repository: ethersphere/swarm
+    #tag: edge
+    repository: stolen/swarm
+    tag: elad@sha256:e8a2baf5724068087f24c6c8680555688a82d96c310479b107585c428bb4cb8a
+  updateStrategy:
+    type: "OnDelete"
+  config:
+    ens_api: "eth:314159265dD8dbb310642f98f50C066173C1259b@http://mainnet-geth-geth.geth:8545"
+    verbosity: 4
+    debug: true
+    maxpeers: 40
+    bzznetworkid: 125
+    storesize: "480000" # 62mb
+    extraFlags:
+      - --ws
+      - --ens-api=test:112234455c3a32fd11230c42e7bccd4a84e02010@http://ropsten-geth-geth.geth:8545
+      - --wsaddr=0.0.0.0
+      - --wsorigins=*
+      - --wsapi=admin,net,debug,bzz,stream
+      - --store.cache.size=1000
+      - --vmodule=swarm/network/*=5,swarm/storage/*=4
+  secrets:
+    password: qwerty
+  ingress:
+    domain: stg.swarm-gateways.net
+    enabled: true
+    tls:
+      enabled: true
+      acmeEnabled: false
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-body-size: 500m
+      nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+      nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+  persistence:
+    enabled: false
+    storageClass: "gp2-delete"
+    accessMode: ReadWriteOnce
+    size: 3Gi
+  resources:
+    requests:
+      memory: 512Mi
+      cpu: null
+    limits:
+      memory: 1024Mi
+      cpu: null
+  tracingAgent:
+    resources:
+      requests:
+        memory: 64Mi
+        cpu: 0.2
+      limits:
+        memory: 64Mi
+        cpu: 0.4
+  nodeSelector:
+    nospot: "true"
+  tolerations:
+    - key: "nospot"
+      operator: "Exists"
+      effect: "NoSchedule"
+    - key: "nospot"
+      operator: "Exists"
+      effect: "NoExecute"
+
+influxdb:
+  image:
+    repo: "influxdb"
+    tag: "1.7.4"
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: null
+    limits:
+      memory: 1Gi
+      cpu: null
+  persistence:
+    enabled: true
+  config:
+    meta:
+      logging_enabled: true
+    data:
+      trace_logging_enabled: true
+  nodeSelector:
+    nospot: "true"
+  tolerations:
+    - key: "nospot"
+      operator: "Exists"
+      effect: "NoSchedule"
+    - key: "nospot"
+      operator: "Exists"
+      effect: "NoExecute"
+
+grafana:
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+      - name: metrics
+        type: influxdb
+        url: http://swarm-influxdb:8086
+        database: metrics
+        user: swarm
+        password: swarm
+        access: proxy
+        isDefault: true
+  dashboards:
+    default:
+      smoke:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/smoke.json
+      ldbstore:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/ldbstore.json
+      swarm:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/swarm.json
+      upload-speed:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/upload-speed.json
+      sliding:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/smoke-sliding.json
+      kad:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/kad.json
+      fetchers:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/fetchers.json
+      timeouts:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/timeouts.json
+      stream:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/stream-dash/stream.json
+
+jaeger:
+  resources:
+    requests:
+      memory: 2000Mi
+      cpu: null
+    limits:
+      memory: 5000Mi
+      cpu: null
+  config:
+    env:
+      SPAN_STORAGE_TYPE: memory
+    args:
+      - "--memory.max-traces=300000"

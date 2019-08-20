@@ -1,0 +1,14 @@
+smoke:
+  image:
+    repository: stolen/swarm-smoke
+    tag: elad
+
+swarm:
+  image:
+    repository: stolen/swarm
+    tag: elad
+
+bootnode:
+  image:
+    repository: stolen/swarm
+    tag: elad
