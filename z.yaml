@@ -17,22 +17,22 @@ helmRepos:
 
 apps:
   # Private cluster
-  private-swarm:
-    tillerNamespace: "elad"
-    namespace: "elad"
-    name: "swarm-private"
-    enabled: true
-    chart: "ethersphere/swarm-private"
-    #chart: "/home/nonsense/code/helm-charts/artifacts/swarm-private-0.0.2.tgz"
-    version: "0.0.2"
-    description: "(Private) Swarm elad cluster"
-    valuesFiles:
-      - "elad/private-swarm.yaml"
-      - "elad/version.yaml"
-    set:
-      swarm.replicaCount: "$REPLICA_COUNT"
-    wait: true
-    timeout: 600
+  #private-swarm:
+    #tillerNamespace: "elad"
+    #namespace: "elad"
+    #name: "swarm-private"
+    #enabled: true
+    #chart: "ethersphere/swarm-private"
+    ##chart: "/home/nonsense/code/helm-charts/artifacts/swarm-private-0.0.2.tgz"
+    #version: "0.0.2"
+    #description: "(Private) Swarm elad cluster"
+    #valuesFiles:
+      #- "elad/private-swarm.yaml"
+      #- "elad/version.yaml"
+    #set:
+      #swarm.replicaCount: "$REPLICA_COUNT"
+    #wait: true
+    #timeout: 600
   #private-smoke-a:
     #tillerNamespace: "elad"
     #namespace: "elad"
