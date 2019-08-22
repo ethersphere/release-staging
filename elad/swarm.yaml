@@ -9,7 +9,7 @@ bootnode:
     repository: stolen/swarm
     #repository: ethersphere/swarm
     #tag: edge
-    tag: elad@sha256:e8a2baf5724068087f24c6c8680555688a82d96c310479b107585c428bb4cb8a
+    tag: elad@sha256:2036996849fffbf4a08fd1de61be7116756ec186ce5104edf0d8b57c61d16ab9
   resources:
     requests:
       memory: 512Mi
@@ -31,7 +31,7 @@ swarm:
   metricsEnabled: true
   tracingEnabled: false
   profilingEnabled: true
-  replicaCount: 50
+  replicaCount: 10
   terminationGracePeriodSeconds: 5
   imagePullPolicy: Always
   podManagementPolicy: Parallel
@@ -39,7 +39,7 @@ swarm:
     #repository: ethersphere/swarm
     #tag: edge
     repository: stolen/swarm
-    tag: elad@sha256:e8a2baf5724068087f24c6c8680555688a82d96c310479b107585c428bb4cb8a
+    tag: elad@sha256:2036996849fffbf4a08fd1de61be7116756ec186ce5104edf0d8b57c61d16ab9
   updateStrategy:
     type: "OnDelete"
   config:
@@ -161,6 +161,9 @@ grafana:
         url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/timeouts.json
       stream:
         url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/stream-dash/stream.json
+      retrieve:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/stream-dash/retrieve.json
+
 
 jaeger:
   resources:
