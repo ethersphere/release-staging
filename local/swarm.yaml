@@ -122,6 +122,11 @@ grafana:
         url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/fetchers.json
       timeouts:
         url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/timeouts.json
+      stream:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/stream-dash/stream.json
+      retrieve:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/stream-dash/retrieve.json
+
 
 jaeger:
   resources:
