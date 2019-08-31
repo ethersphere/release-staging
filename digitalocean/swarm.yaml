@@ -2,7 +2,7 @@ bootnode:
   imagePullPolicy: Always
   persistence:
     enabled: false
-    storageClass: gp2-delete
+    #storageClass: gp2-delete
     accessMode: ReadWriteOnce
     size: 1Gi
   image:
@@ -17,21 +17,21 @@ bootnode:
     limits:
       memory: 1024Mi
       cpu: null
-  nodeSelector:
-    nospot: "true"
-  tolerations:
-    - key: "nospot"
-      operator: "Exists"
-      effect: "NoSchedule"
-    - key: "nospot"
-      operator: "Exists"
-      effect: "NoExecute"
+  #nodeSelector:
+    #nospot: "true"
+  #tolerations:
+    #- key: "nospot"
+      #operator: "Exists"
+      #effect: "NoSchedule"
+    #- key: "nospot"
+      #operator: "Exists"
+      #effect: "NoExecute"
 
 swarm:
   metricsEnabled: true
   tracingEnabled: false
   profilingEnabled: true
-  replicaCount: 20
+  replicaCount: 10
   terminationGracePeriodSeconds: 5
   imagePullPolicy: Always
   podManagementPolicy: Parallel
@@ -47,7 +47,7 @@ swarm:
     verbosity: 4
     debug: true
     maxpeers: 40
-    bzznetworkid: 125
+    bzznetworkid: 123
     storesize: "480000" # 62mb
     extraFlags:
       - --ws
@@ -72,9 +72,9 @@ swarm:
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
   persistence:
     enabled: false
-    storageClass: "io1-800"
+    #storageClass: "io1-800"
     accessMode: ReadWriteOnce
-    size: 16Gi
+    size: 8Gi
   resources:
     requests:
       memory: 512Mi
@@ -90,15 +90,15 @@ swarm:
       limits:
         memory: 64Mi
         cpu: 0.4
-  nodeSelector:
-    nospot: "true"
-  tolerations:
-    - key: "nospot"
-      operator: "Exists"
-      effect: "NoSchedule"
-    - key: "nospot"
-      operator: "Exists"
-      effect: "NoExecute"
+  #nodeSelector:
+    #nospot: "true"
+  #tolerations:
+    #- key: "nospot"
+      #operator: "Exists"
+      #effect: "NoSchedule"
+    #- key: "nospot"
+      #operator: "Exists"
+      #effect: "NoExecute"
 
 influxdb:
   image:
@@ -118,15 +118,15 @@ influxdb:
       logging_enabled: true
     data:
       trace_logging_enabled: true
-  nodeSelector:
-    nospot: "true"
-  tolerations:
-    - key: "nospot"
-      operator: "Exists"
-      effect: "NoSchedule"
-    - key: "nospot"
-      operator: "Exists"
-      effect: "NoExecute"
+  #nodeSelector:
+    #nospot: "true"
+  #tolerations:
+    #- key: "nospot"
+      #operator: "Exists"
+      #effect: "NoSchedule"
+    #- key: "nospot"
+      #operator: "Exists"
+      #effect: "NoExecute"
 
 grafana:
   datasources:
