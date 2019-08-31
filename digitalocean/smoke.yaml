@@ -3,18 +3,18 @@ smoke:
     #repository: ethersphere/swarm
     #tag: edge-alltools
     repository: stolen/swarm
-    tag: elad@sha256:9d5b30d08b8c5b188f03eedf9f009adb9bac85e02ca8749f530d283c8a3a127e
+    tag: elad@sha256:6391aa2c466b8e4ad17b8816b4a5f580b3aa4e27f03a6957ea9477d1511d2afe
   schedule: "* * * * *"
   successfulJobsHistoryLimit: 10
   config:
-    swarmReplicas: 19
+    swarmReplicas: 10
     name: "upload-sync-a"
     prefix: "swarm-private"
     suffix: "swarm-private-headless"
     operation: "upload_and_sync"
     influxdbEndpoint: "http://swarm-influxdb:8086"
     extraFlags:
-      - --filesize=50000
+      - --filesize=200000
       - --timeout=600
       - --http-port=8500
       - --verbosity=4

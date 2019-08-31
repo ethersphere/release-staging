@@ -9,7 +9,7 @@ bootnode:
     #repository: ethersphere/swarm
     #tag: edge
     repository: stolen/swarm
-    tag: elad@sha256:5d9332c3f8d30a945b0cf5960a1587cb476f93c68a62a0514c85053ce7b5f714
+    tag: elad@sha256:6391aa2c466b8e4ad17b8816b4a5f580b3aa4e27f03a6957ea9477d1511d2afe
   resources:
     requests:
       memory: 512Mi
@@ -39,7 +39,7 @@ swarm:
     #repository: ethersphere/swarm
     #tag: edge
     repository: stolen/swarm
-    tag: elad@sha256:5d9332c3f8d30a945b0cf5960a1587cb476f93c68a62a0514c85053ce7b5f714
+    tag: elad@sha256:6391aa2c466b8e4ad17b8816b4a5f580b3aa4e27f03a6957ea9477d1511d2afe
   updateStrategy:
     type: "OnDelete"
   config:
