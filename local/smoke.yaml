@@ -14,8 +14,7 @@ smoke:
     influxdbEndpoint: "http://swarm-influxdb:8086"
     extraFlags:
       - --filesize=50000
-      - --timeout=600
+      - --timeout=500
       - --http-port=8500
       - --verbosity=4
       - --sync-delay
-      - --debug
