@@ -9,7 +9,7 @@ bootnode:
     #repository: ethersphere/swarm
     #tag: edge
     repository: stolen/swarm
-    tag: elad@sha256:6391aa2c466b8e4ad17b8816b4a5f580b3aa4e27f03a6957ea9477d1511d2afe
+    tag: elad@sha256:e354ed70dc759b36456cacd103d633478371e62049bb0dd66f13241828ef372c
   resources:
     requests:
       memory: 512Mi
@@ -31,7 +31,7 @@ swarm:
   metricsEnabled: true
   tracingEnabled: false
   profilingEnabled: true
-  replicaCount: 10
+  replicaCount: 20
   terminationGracePeriodSeconds: 5
   imagePullPolicy: Always
   podManagementPolicy: Parallel
@@ -39,7 +39,7 @@ swarm:
     #repository: ethersphere/swarm
     #tag: edge
     repository: stolen/swarm
-    tag: elad@sha256:6391aa2c466b8e4ad17b8816b4a5f580b3aa4e27f03a6957ea9477d1511d2afe
+    tag: elad@sha256:e354ed70dc759b36456cacd103d633478371e62049bb0dd66f13241828ef372c
   updateStrategy:
     type: "OnDelete"
   config:
@@ -144,7 +144,7 @@ grafana:
   dashboards:
     default:
       smoke:
-        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/smoke.json
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/stream-dash/smoke.json
       ldbstore:
         url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/ldbstore.json
       swarm:
