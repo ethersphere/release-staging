@@ -9,10 +9,10 @@ smoke:
 
   imagePullPolicy: Always
   image:
-    #repository: stolen/swarm
-    #tag: elad@sha256:e8850872c9addd33c946566876ef58e60265f3505c07c1b0b7283d2e7048ad8e
-    repository: ethersphere/swarm
-    tag: edge
+    repository: stolen/swarm
+    tag: elad@sha256:e8850872c9addd33c946566876ef58e60265f3505c07c1b0b7283d2e7048ad8e
+    #repository: ethersphere/swarm
+    #tag: edge-alltools
   schedule: "*/3 * * * *"
   swarmReplicas: 50
   successfulJobsHistoryLimit: 60
@@ -21,7 +21,7 @@ smoke:
     prefix: "swarm-private"
     suffix: "swarm-private-headless"
     operation: "upload_and_sync"
-    influxdbEndpoint: "http://swarm-private-influxdb:8086"
+    influxdbEndpoint: "http://swarm-influxdb:8086"
     extraFlags:
       - --filesize=100000
       - --timeout=800

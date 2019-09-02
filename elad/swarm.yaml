@@ -144,7 +144,7 @@ grafana:
   dashboards:
     default:
       smoke:
-        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/smoke.json
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/stream-dash/smoke.json
       ldbstore:
         url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/ldbstore.json
       swarm:
