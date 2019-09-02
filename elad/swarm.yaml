@@ -31,7 +31,7 @@ swarm:
   metricsEnabled: true
   tracingEnabled: false
   profilingEnabled: true
-  replicaCount: 20
+  replicaCount: 40
   terminationGracePeriodSeconds: 5
   imagePullPolicy: Always
   podManagementPolicy: Parallel
@@ -71,7 +71,7 @@ swarm:
       nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
   persistence:
-    enabled: false
+    enabled: true
     storageClass: "io1-800"
     accessMode: ReadWriteOnce
     size: 16Gi
