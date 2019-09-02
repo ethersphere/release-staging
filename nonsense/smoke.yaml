@@ -1,6 +1,20 @@
 smoke:
+  resources:
+    requests:
+      memory: 412Mi
+      cpu: 1
+    limits:
+      memory: 824Mi
+      cpu: 1
+
   imagePullPolicy: Always
+  image:
+    #repository: stolen/swarm
+    #tag: elad@sha256:e8850872c9addd33c946566876ef58e60265f3505c07c1b0b7283d2e7048ad8e
+    repository: ethersphere/swarm
+    tag: edge
   schedule: "*/3 * * * *"
+  swarmReplicas: 50
   successfulJobsHistoryLimit: 60
   config:
     name: "upload-sync-a"
