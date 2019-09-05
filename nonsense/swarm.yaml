@@ -1,9 +1,9 @@
 bootnode:
   image:
-    #repository: stolen/swarm
-    #tag: elad@sha256:e8850872c9addd33c946566876ef58e60265f3505c07c1b0b7283d2e7048ad8e
-    repository: ethersphere/swarm
-    tag: edge
+    repository: stolen/swarm
+    tag: elad@sha256:f3fc19c6464e2bd15e5307235a803f6130ed391c1a99d3ac21f9944604193ef0
+    #repository: ethersphere/swarm
+    #tag: edge
   nodeSelector:
     nospot: "true"
   tolerations:
@@ -16,6 +16,9 @@ bootnode:
   terminationGracePeriodSeconds: 3
   updateStrategy:
     type: "OnDelete"
+  config:
+    extraFlags:
+      - --tracing
   persistence:
     enabled: true
     storageClass: "gp2-delete"
@@ -31,10 +34,10 @@ bootnode:
 
 swarm:
   image:
-    #repository: stolen/swarm
-    #tag: elad@sha256:e8850872c9addd33c946566876ef58e60265f3505c07c1b0b7283d2e7048ad8e
-    repository: ethersphere/swarm
-    tag: edge
+    repository: stolen/swarm
+    tag: elad@sha256:f3fc19c6464e2bd15e5307235a803f6130ed391c1a99d3ac21f9944604193ef0
+    #repository: ethersphere/swarm
+    #tag: edge
   nodeSelector:
     nospot: "true"
   tolerations:
@@ -85,13 +88,13 @@ swarm:
     enabled: true
     storageClass: "gp2-delete"
     accessMode: ReadWriteOnce
-    size: 3Gi
+    size: 13Gi
   resources:
     requests:
       memory: 412Mi
       cpu: null
     limits:
-      memory: 824Mi
+      memory: 1024Mi
       cpu: null
   tracingAgent:
     resources:
@@ -136,7 +139,7 @@ grafana:
   dashboards:
     default:
       smoke:
-        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/stream-dash/smoke.json
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/smoke.json
       ldbstore:
         url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/ldbstore.json
       swarm:
