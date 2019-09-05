@@ -15,16 +15,16 @@ smoke:
     #tag: edge-alltools
   #schedule: "*/3 * * * *"
   schedule: "*/3 * * * *"
-  swarmReplicas: 50
   successfulJobsHistoryLimit: 60
   config:
+    swarmReplicas: 50
     name: "upload-sync-a"
     prefix: "swarm-private"
     suffix: "swarm-private-headless"
     operation: "upload_and_sync"
     influxdbEndpoint: "http://swarm-influxdb:8086"
     extraFlags:
-      - --filesize=50000000
+      - --filesize=100000000
       - --timeout=800
       - --sync-delay
       - --debug
