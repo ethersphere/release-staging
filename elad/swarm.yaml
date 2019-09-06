@@ -6,10 +6,11 @@ bootnode:
     accessMode: ReadWriteOnce
     size: 1Gi
   image:
-    repository: stolen/swarm
+    repository: janos/swarm
+    tag: latest
     #repository: ethersphere/swarm
     #tag: edge
-    tag: elad@sha256:2036996849fffbf4a08fd1de61be7116756ec186ce5104edf0d8b57c61d16ab9
+    #tag: elad@sha256:2036996849fffbf4a08fd1de61be7116756ec186ce5104edf0d8b57c61d16ab9
   resources:
     requests:
       memory: 512Mi
@@ -38,8 +39,9 @@ swarm:
   image:
     #repository: ethersphere/swarm
     #tag: edge
-    repository: stolen/swarm
-    tag: elad@sha256:2036996849fffbf4a08fd1de61be7116756ec186ce5104edf0d8b57c61d16ab9
+    repository: janos/swarm
+    tag: latest
+    #tag: elad@sha256:2036996849fffbf4a08fd1de61be7116756ec186ce5104edf0d8b57c61d16ab9
   updateStrategy:
     type: "OnDelete"
   config:
@@ -57,6 +59,7 @@ swarm:
       - --wsapi=admin,net,debug,bzz,stream
       - --store.cache.size=1000
       - --vmodule=swarm/network/*=5,swarm/storage/*=4
+      - --bootnodes="enode://4c113504601930bf2000c29bcd98d1716b6167749f58bad703bae338332fe93cc9d9204f08afb44100dc7bea479205f5d162df579f9a8f76f8b402d339709023@3.122.203.99:30301"
   secrets:
     password: qwerty
   ingress:

@@ -2,8 +2,9 @@ smoke:
   image:
     #repository: ethersphere/swarm
     #tag: edge
-    repository: stolen/swarm
-    tag: elad@sha256:7f8d68a004edb49ae8f3dcaf35e2a1608b38537b1b670ee0099a7bb0d940b520
+    repository: janos/swarm
+    tag: latest
+    #tag: elad@sha256:7f8d68a004edb49ae8f3dcaf35e2a1608b38537b1b670ee0099a7bb0d940b520
   schedule: "* * * * *"
   successfulJobsHistoryLimit: 10
   config:
