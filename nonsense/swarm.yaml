@@ -1,7 +1,7 @@
 bootnode:
   image:
     repository: stolen/swarm
-    tag: elad@sha256:f3fc19c6464e2bd15e5307235a803f6130ed391c1a99d3ac21f9944604193ef0
+    tag: elad@sha256:626edd672b2f42ffaaebf10089e50f9966e1d9d86ffa53b3b4222992a4b28e10
     #repository: ethersphere/swarm
     #tag: edge
   nodeSelector:
@@ -35,7 +35,7 @@ bootnode:
 swarm:
   image:
     repository: stolen/swarm
-    tag: elad@sha256:f3fc19c6464e2bd15e5307235a803f6130ed391c1a99d3ac21f9944604193ef0
+    tag: elad@sha256:626edd672b2f42ffaaebf10089e50f9966e1d9d86ffa53b3b4222992a4b28e10
     #repository: ethersphere/swarm
     #tag: edge
   nodeSelector:
