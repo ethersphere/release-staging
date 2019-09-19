@@ -1,6 +1,6 @@
 smoke:
   imagePullPolicy: Always
-  schedule: "*/7 * * * *"
+  schedule: "*/5 * * * *"
   successfulJobsHistoryLimit: 60
   config:
     name: "upload-sync-a"
@@ -10,9 +10,9 @@ smoke:
     influxdbEndpoint: "http://swarm-private-influxdb:8086"
     extraFlags:
       - --filesize=100000
-      - --timeout=1500
-      - --sync-delay
-      - --sync-mode=pullsync
+      - --timeout=1600
+      - --pushsync-delay
+      - --sync-mode=pushsync
       - --debug
       - --http-port=8500
-      - --verbosity=4
+      - --verbosity=5
