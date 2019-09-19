@@ -1,6 +1,6 @@
 smoke:
   imagePullPolicy: Always
-  schedule: "*/4 * * * *"
+  schedule: "*/7 * * * *"
   successfulJobsHistoryLimit: 60
   config:
     name: "upload-sync-a"
@@ -12,7 +12,7 @@ smoke:
       - --filesize=100000
       - --timeout=1500
       - --sync-delay
-      - --debug
       - --sync-mode=pullsync
+      - --debug
       - --http-port=8500
       - --verbosity=4

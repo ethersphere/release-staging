@@ -1,5 +1,5 @@
 smoke:
-  schedule: "*/2 * * * *"
+  schedule: "*/10 * * * *"
   successfulJobsHistoryLimit: 60
   config:
     name: "upload-sync-a"
@@ -8,9 +8,9 @@ smoke:
     operation: "upload_and_sync"
     influxdbEndpoint: "http://swarm-private-influxdb:8086"
     extraFlags:
-      - --filesize=20000
-      - --timeout=600
-      - --sync-delay
-      - --only-upload
+      - --filesize=50000
+      - --timeout=1500
+      - --pullsync-delay
+      - --sync-mode=pullsync
       - --http-port=8500
       - --verbosity=3
