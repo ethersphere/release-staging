@@ -27,6 +27,6 @@ spec:
         - --sync-mode=pushsync
         - --debug
         - --http-port=8500
-        - --verbosity=4
+        - --verbosity=5
         - upload_and_sync
       restartPolicy: Never

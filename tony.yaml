@@ -24,7 +24,7 @@ apps:
     enabled: true
     chart: "ethersphere/swarm-private"
     #chart: "/home/nonsense/code/helm-charts/artifacts/swarm-private-0.0.2.tgz"
-    version: "0.0.3"
+    version: "0.0.4"
     description: "(Private) Swarm tony cluster"
     valuesFiles:
       - "tony/private-swarm.yaml"
@@ -39,7 +39,7 @@ apps:
     #name: "private-smoke-a"
     #enabled: true
     #chart: "ethersphere/smoke"
-    #version: "0.0.2"
+    #version: "0.0.4"
     #description: "(Private) Smoke test: Upload and sync"
     #valuesFiles:
       #- "tony/private-smoke-a.yaml"
@@ -53,7 +53,7 @@ apps:
     #name: "private-smoke-only-upload"
     #enabled: true
     #chart: "ethersphere/smoke"
-    #version: "0.0.2"
+    #version: "0.0.4"
     #description: "(Private) Smoke test: Only Upload"
     #valuesFiles:
       #- "tony/private-smoke-only-upload.yaml"
