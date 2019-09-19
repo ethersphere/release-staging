@@ -28,7 +28,8 @@ apps:
     tillerNamespace: "staging"
     namespace: "staging"
     name: "swarm-public"
-    enabled: true
+    enabled: false
+    purge: true
     chart: "ethersphere/swarm"
     version: "0.0.2"
     description: "(Public) Swarm staging cluster"
@@ -43,7 +44,8 @@ apps:
     tillerNamespace: "staging"
     namespace: "staging"
     name: "public-smoke-50"
-    enabled: true
+    enabled: false
+    purge: true
     chart: "ethersphere/smoke"
     version: "0.0.2"
     description: "(Public) Smoke test: Upload and sync 50KB"
@@ -55,7 +57,8 @@ apps:
     tillerNamespace: "staging"
     namespace: "staging"
     name: "public-smoke-110"
-    enabled: true
+    enabled: false
+    purge: true
     chart: "ethersphere/smoke"
     version: "0.0.2"
     description: "(Public) Smoke test: Upload and sync 110KB"
