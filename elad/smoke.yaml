@@ -1,10 +1,7 @@
 smoke:
   image:
-    #repository: ethersphere/swarm
-    #tag: edge
     repository: janos/swarm
     tag: latest
-    #tag: elad@sha256:7f8d68a004edb49ae8f3dcaf35e2a1608b38537b1b670ee0099a7bb0d940b520
   schedule: "* * * * *"
   successfulJobsHistoryLimit: 10
   config:
@@ -15,9 +12,16 @@ smoke:
     operation: "upload_and_sync"
     influxdbEndpoint: "http://swarm-influxdb:8086"
     extraFlags:
-      - --filesize=100000
-      - --timeout=600
+      - --metrics
+      - --metrics.influxdb.endpoint=http://swarm-private-influxdb:8086
+      - --metrics.influxdb.username=swarm
+      - --metrics.influxdb.password=swarm
+      - --metrics.influxdb.database=metrics
+      - --metrics.influxdb.tags=host=upload-sync-a
+      - --filesize=50000
+      - --timeout=1600
+      - --pushsync-delay
+      - --sync-mode=pushsync
+      - --debug
       - --http-port=8500
       - --verbosity=5
-      - --sync-delay
-      - --debug
