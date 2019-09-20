@@ -11,9 +11,6 @@ bootnode:
   terminationGracePeriodSeconds: 3
   updateStrategy:
     type: "OnDelete"
-  config:
-    extraFlags:
-      - --tracing
   persistence:
     enabled: false
     storageClass: "gp2-delete"
@@ -38,7 +35,7 @@ swarm:
       operator: "Exists"
       effect: "NoExecute"
   metricsEnabled: true
-  tracingEnabled: true
+  tracingEnabled: false
   profilingEnabled: true
   terminationGracePeriodSeconds: 3
   imagePullPolicy: Always
@@ -54,7 +51,7 @@ swarm:
     storesize: "500000" # 500000 * 4KB = 2GB
     extraFlags:
       - --ws
-      - --nosync
+      - --sync-mode=push
       - --ens-api=test:112234455c3a32fd11230c42e7bccd4a84e02010@http://ropsten-geth-geth.geth:8545
       - --wsaddr=0.0.0.0
       - --wsorigins=*
@@ -159,6 +156,15 @@ grafana:
         url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/stream.json
 
 jaeger:
+  nodeSelector:
+    nospot: "true"
+  tolerations:
+    - key: "nospot"
+      operator: "Exists"
+      effect: "NoSchedule"
+    - key: "nospot"
+      operator: "Exists"
+      effect: "NoExecute"
   resources:
     requests:
       memory: 2000Mi

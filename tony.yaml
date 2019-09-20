@@ -24,7 +24,7 @@ apps:
     enabled: true
     chart: "ethersphere/swarm-private"
     #chart: "/home/nonsense/code/helm-charts/artifacts/swarm-private-0.0.2.tgz"
-    version: "0.0.4"
+    version: "0.0.5"
     description: "(Private) Swarm tony cluster"
     valuesFiles:
       - "tony/private-swarm.yaml"
