@@ -1,25 +1,68 @@
+bootnode:
+  enabled: true
+  nodeSelector:
+    nospot: "true"
+  tolerations:
+    - key: "nospot"
+      operator: "Exists"
+      effect: "NoSchedule"
+    - key: "nospot"
+      operator: "Exists"
+      effect: "NoExecute"
+  terminationGracePeriodSeconds: 3
+  updateStrategy:
+    type: "OnDelete"
+  config:
+    extraFlags:
+      - --ws
+      - --wsaddr=0.0.0.0
+      - --wsorigins=*
+      - --wsapi=admin,net,debug,bzz
+  persistence:
+    enabled: true
+    storageClass: "gp2-delete"
+    accessMode: ReadWriteOnce
+    size: 1Gi
+  resources:
+    requests:
+      memory: 512Mi
+      cpu: null
+    limits:
+      memory: 1524Mi
+      cpu: null
+
 swarm:
+  nodeSelector:
+    nospot: "true"
+  tolerations:
+    - key: "nospot"
+      operator: "Exists"
+      effect: "NoSchedule"
+    - key: "nospot"
+      operator: "Exists"
+      effect: "NoExecute"
   metricsEnabled: true
-  tracingEnabled: false
-  profilingEnabled: false
-  terminationGracePeriodSeconds: 5
+  tracingEnabled: true
+  profilingEnabled: true
+  terminationGracePeriodSeconds: 30
   imagePullPolicy: IfNotPresent
   podManagementPolicy: Parallel
   updateStrategy:
     type: "OnDelete"
   config:
-    ens_api: "eth:314159265dD8dbb310642f98f50C066173C1259b@http://mainnet-geth-geth.geth:8545"
+    ens_api: "314159265dD8dbb310642f98f50C066173C1259b@https://cloudflare-eth.com"
     verbosity: 4
     debug: true
     maxpeers: 25
-    bzznetworkid: 4
+    bzznetworkid: 61
     storesize: "5000000" # 5000000 * 4KB = 20GB
     extraFlags:
-      - --ens-api=test:112234455c3a32fd11230c42e7bccd4a84e02010@http://ropsten-geth-geth.geth:8545
       - --ws
       - --wsaddr=0.0.0.0
-      - --wsorigins=localhost
-      - --wsapi=admin,net,debug,bzz
+      - --wsorigins=*
+      - --wsapi=admin,net,debug,bzz,stream,accounting,swap
+      - --wsaddr=0.0.0.0
+      - --sync-mode=all
   secrets:
     password: qwerty
   ingress:
@@ -33,91 +76,111 @@ swarm:
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
   persistence:
     enabled: true
+    storageClass: "gp2-delete"
+    accessMode: ReadWriteOnce
     size: 30Gi
-    storageClass: gp2
   resources:
     requests:
-      memory: 512Mi
-      cpu: 1.2
+      memory: 412Mi
+      cpu: null
     limits:
-      memory: 1024Mi
-      cpu: 1.2
+      memory: 1224Mi
+      cpu: null
+  tracingAgent:
+    resources:
+      requests:
+        memory: 64Mi
+        cpu: null
+      limits:
+        memory: 64Mi
+        cpu: null
 
 influxdb:
-  image:
-    repo: "influxdb"
-    tag: "1.7.4"
+  nodeSelector:
+    nospot: "true"
+  tolerations:
+    - key: "nospot"
+      operator: "Exists"
+      effect: "NoSchedule"
+    - key: "nospot"
+      operator: "Exists"
+      effect: "NoExecute"
   resources:
     requests:
       memory: 256Mi
-      cpu: 0.1
+      cpu: null
     limits:
       memory: 8Gi
-      cpu: 4
+      cpu: null
   persistence:
     enabled: true
-    size: 40Gi
-    storageClass: gp2
-
-kapacitor:
-  persistence:
-    enabled: true
-    storageClass: "gp2"
     accessMode: ReadWriteOnce
-    size: 8Gi
-  resources:
-    requests:
-      memory: 512Mi
-      cpu: 0.4
-    limits:
-      memory: 512Mi
-      cpu: 0.4
-  envVars:
-    KAPACITOR_LOGGING_LEVEL: "INFO"
-  influxURL: http://swarm-public-influxdb:8086
-
-kapacitor-importer:
-  kapacitorURL: http://swarm-public-kapacitor:9092
-  batchScripts:
-    # Upload and sync failed too often
-    smoke_upload_and_sync.tick: |-
-      dbrp "metrics"."autogen"
-      batch
-          |query('''
-              SELECT count("value")
-              FROM "metrics"."autogen"."swarm-smoke.upload-and-sync.fail.count"
-          ''')
-              .period(1h)
-              .every(1h)
-          |alert()
-              .crit(lambda: "count" >= 4)
-              .message('[Public] Smoke - Upload and sync failed {{index .Fields "count"}} times in the last hour')
-              .log('/var/lib/kapacitor/alerts.log')
-    # Fetching a file is taking too long
-    smoke_fetch_download_time.tick: |-
-      dbrp "metrics"."autogen"
-      batch
-          |query('''
-              SELECT mean("max") / 1000000000
-              FROM "metrics"."autogen"."swarm-smoke.upload-and-sync.single.fetch-time.span"
-          ''')
-              .period(1h)
-              .every(1h)
-          |alert()
-              .crit(lambda: "mean" >= 60)
-              .message('[Public] Smoke - Fetch took {{index .Fields "mean"}}s on average over the last hour')
-              .log('/var/lib/kapacitor/alerts.log')
+    size: 40Gi
+  config:
+    meta:
+      logging_enabled: true
+    data:
+      trace_logging_enabled: true
 
 grafana:
+  nodeSelector:
+    nospot: "true"
+  tolerations:
+    - key: "nospot"
+      operator: "Exists"
+      effect: "NoSchedule"
+    - key: "nospot"
+      operator: "Exists"
+      effect: "NoExecute"
   datasources:
     datasources.yaml:
       apiVersion: 1
       datasources:
-        - name: metrics
-          type: influxdb
-          url: http://swarm-public-influxdb:8086
-          database: metrics
-          user: swarm
-          password: swarm
-          access: proxy
-          isDefault: true
+      - name: metrics
+        type: influxdb
+        url: http://swarm-public-influxdb:8086
+        database: metrics
+        user: swarm
+        password: swarm
+        access: proxy
+        isDefault: true
+  dashboards:
+    default:
+      smoke:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/smoke.json
+      ldbstore:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/ldbstore.json
+      swarm:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/swarm.json
+      upload-speed:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/upload-speed.json
+      sliding:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/smoke-sliding.json
+      kad:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/kad.json
+      fetchers:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/fetchers.json
+      timeouts:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/timeouts.json
+      p2p:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/p2p.json
+      pushsync:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/pushsync.json
+      runtime:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/runtime.json
+      pss:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/pss.json
+
+jaeger:
+  resources:
+    requests:
+      memory: 2000Mi
+      cpu: null
+    limits:
+      memory: 5000Mi
+      cpu: null
+  config:
+    env:
+      SPAN_STORAGE_TYPE: memory
+    args:
+      - "--memory.max-traces=300000"

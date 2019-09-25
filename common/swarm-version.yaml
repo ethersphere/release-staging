@@ -1,4 +1,4 @@
 swarm:
   image:
-    repository: ethdevops/swarm
-    tag: edge@sha256:4c8ac83f432108f0ccc1490f2d5fcf3ea8dbaac1321123a61a23a5bcd1a317a7
+    repository: skylenet/swarm-test
+    tag: 0.5.0-rc1
