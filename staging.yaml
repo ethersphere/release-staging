@@ -31,38 +31,13 @@ apps:
     enabled: false
     purge: true
     chart: "ethersphere/swarm"
-    version: "0.0.2"
+    version: "0.0.4"
     description: "(Public) Swarm staging cluster"
     valuesFiles:
       - "staging/public-swarm.yaml"
       - "common/swarm-version.yaml"
+      - "common/swarm-bootnode-version.yaml"
     set:
       swarm.replicaCount: "$STAGING_PUBLIC_REPLICAS"
     wait: true
     timeout: 600
-  public-smoke-50:
-    tillerNamespace: "staging"
-    namespace: "staging"
-    name: "public-smoke-50"
-    enabled: false
-    purge: true
-    chart: "ethersphere/smoke"
-    version: "0.0.2"
-    description: "(Public) Smoke test: Upload and sync 50KB"
-    valuesFile: "staging/public-smoke-50.yaml"
-    set:
-      smoke.config.swarmReplicas: "$STAGING_PUBLIC_REPLICAS"
-    wait: false
-  public-smoke-110:
-    tillerNamespace: "staging"
-    namespace: "staging"
-    name: "public-smoke-110"
-    enabled: false
-    purge: true
-    chart: "ethersphere/smoke"
-    version: "0.0.2"
-    description: "(Public) Smoke test: Upload and sync 110KB"
-    valuesFile: "staging/public-smoke-110.yaml"
-    set:
-      smoke.config.swarmReplicas: "$STAGING_PUBLIC_REPLICAS"
-    wait: false
