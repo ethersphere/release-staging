@@ -28,7 +28,7 @@ apps:
     tillerNamespace: "staging"
     namespace: "staging"
     name: "swarm-public"
-    enabled: false
+    enabled: true
     purge: true
     chart: "ethersphere/swarm"
     version: "0.0.5"
