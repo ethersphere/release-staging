@@ -17,8 +17,7 @@ bootnode:
       - --ws
       - --wsaddr=0.0.0.0
       - --wsorigins=*
-      - --wsapi=admin,net,debug,bzz,stream,accounting
-      - --sync-mode=all
+      - --wsapi=admin,net,debug,bzz
   persistence:
     enabled: true
     storageClass: "gp2-delete"
@@ -63,6 +62,7 @@ swarm:
       - --wsorigins=*
       - --wsapi=admin,net,debug,bzz,stream,accounting,swap
       - --wsaddr=0.0.0.0
+      - --sync-mode=all
   secrets:
     password: qwerty
   ingress:
