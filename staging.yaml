@@ -31,7 +31,7 @@ apps:
     enabled: false
     purge: true
     chart: "ethersphere/swarm"
-    version: "0.0.4"
+    version: "0.0.5"
     description: "(Public) Swarm staging cluster"
     valuesFiles:
       - "staging/public-swarm.yaml"
