@@ -4,29 +4,29 @@ smoke:
       memory: 412Mi
       cpu: 1
     limits:
-      memory: 824Mi
+      memory: 1256Mi
       cpu: 1
 
   imagePullPolicy: Always
   image:
-    repository: stolen/swarm
-    tag: elad@sha256:626edd672b2f42ffaaebf10089e50f9966e1d9d86ffa53b3b4222992a4b28e10
+    repository: ethersphere/swarm
+    tag: edge-alltools
     #repository: ethersphere/swarm
     #tag: edge-alltools
-  #schedule: "*/3 * * * *"
   schedule: "*/3 * * * *"
-  successfulJobsHistoryLimit: 60
+  #schedule: "* * * * *"
+  successfulJobsHistoryLimit: 20
   config:
-    swarmReplicas: 50
+    swarmReplicas: 40
     name: "upload-sync-a"
     prefix: "swarm-private"
     suffix: "swarm-private-headless"
     operation: "upload_and_sync"
     influxdbEndpoint: "http://swarm-influxdb:8086"
     extraFlags:
-      - --filesize=100000000
-      - --timeout=800
+      - --filesize=100000
+      - --timeout=1000
       - --sync-delay
       - --debug
       - --http-port=8500
-      - --verbosity=4
+      - --verbosity=3

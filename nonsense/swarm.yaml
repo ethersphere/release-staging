@@ -1,18 +1,18 @@
 bootnode:
   image:
-    repository: stolen/swarm
-    tag: elad@sha256:626edd672b2f42ffaaebf10089e50f9966e1d9d86ffa53b3b4222992a4b28e10
-    #repository: ethersphere/swarm
-    #tag: edge
-  nodeSelector:
-    nospot: "true"
-  tolerations:
-    - key: "nospot"
-      operator: "Exists"
-      effect: "NoSchedule"
-    - key: "nospot"
-      operator: "Exists"
-      effect: "NoExecute"
+    repository: ethersphere/swarm
+    #repository: stolen/swarm
+    tag: edge
+    #tag: elad@sha256:9af906899b8017328f0fb68fdda675fdc13ac5cea23584ea34c1d1c122b961f9
+  #nodeSelector:
+    #nospot: "true"
+  #tolerations:
+    #- key: "nospot"
+      #operator: "Exists"
+      #effect: "NoSchedule"
+    #- key: "nospot"
+      #operator: "Exists"
+      #effect: "NoExecute"
   terminationGracePeriodSeconds: 3
   updateStrategy:
     type: "OnDelete"
@@ -34,24 +34,24 @@ bootnode:
 
 swarm:
   image:
-    repository: stolen/swarm
-    tag: elad@sha256:626edd672b2f42ffaaebf10089e50f9966e1d9d86ffa53b3b4222992a4b28e10
-    #repository: ethersphere/swarm
-    #tag: edge
-  nodeSelector:
-    nospot: "true"
-  tolerations:
-    - key: "nospot"
-      operator: "Exists"
-      effect: "NoSchedule"
-    - key: "nospot"
-      operator: "Exists"
-      effect: "NoExecute"
+    repository: ethersphere/swarm
+    #repository: stolen/swarm
+    tag: edge
+    #tag: elad@sha256:9af906899b8017328f0fb68fdda675fdc13ac5cea23584ea34c1d1c122b961f9
+  #nodeSelector:
+    #nospot: "true"
+  #tolerations:
+    #- key: "nospot"
+      #operator: "Exists"
+      #effect: "NoSchedule"
+    #- key: "nospot"
+      #operator: "Exists"
+      #effect: "NoExecute"
   metricsEnabled: true
   tracingEnabled: true
   profilingEnabled: true
   terminationGracePeriodSeconds: 3
-  replicaCount: 50
+  replicaCount: 40
   imagePullPolicy: Always
   podManagementPolicy: Parallel
   updateStrategy:
@@ -61,7 +61,7 @@ swarm:
     verbosity: 4
     debug: true
     maxpeers: 40
-    bzznetworkid: 179
+    bzznetworkid: 172
     storesize: "160000" # 160000 * 4KB = 640MB
     extraFlags:
       - --ws
@@ -71,6 +71,8 @@ swarm:
       - --wsapi=admin,net,debug,bzz,stream
       - --store.cache.size=1000
       - --vmodule=swarm/network/*=3,swarm/storage/*=3
+      - --mutex-profile
+      - --block-profile
   secrets:
     password: qwerty
   ingress:
@@ -85,10 +87,10 @@ swarm:
       nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
   persistence:
-    enabled: true
+    enabled: false
     storageClass: "gp2-delete"
     accessMode: ReadWriteOnce
-    size: 13Gi
+    size: 30Gi
   resources:
     requests:
       memory: 412Mi
@@ -113,8 +115,17 @@ influxdb:
     limits:
       memory: 8Gi
       cpu: null
+  #nodeSelector:
+    #nospot: "true"
+  #tolerations:
+    #- key: "nospot"
+      #operator: "Exists"
+      #effect: "NoSchedule"
+    #- key: "nospot"
+      #operator: "Exists"
+      #effect: "NoExecute"
   persistence:
-    enabled: true
+    enabled: false
     accessMode: ReadWriteOnce
     size: 15Gi
   config:
@@ -139,7 +150,7 @@ grafana:
   dashboards:
     default:
       smoke:
-        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/stream-dash/smoke.json
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/smoke.json
       ldbstore:
         url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/ldbstore.json
       swarm:
@@ -155,9 +166,9 @@ grafana:
       timeouts:
         url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/timeouts.json
       stream:
-        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/stream-dash/stream.json
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/stream.json
       retrieve:
-        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/stream-dash/retrieve.json
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/retrieve.json
 
 jaeger:
   resources:
