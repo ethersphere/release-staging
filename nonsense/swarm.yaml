@@ -87,7 +87,7 @@ swarm:
       nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
   persistence:
-    enabled: false
+    enabled: true
     storageClass: "gp2-delete"
     accessMode: ReadWriteOnce
     size: 30Gi
@@ -125,7 +125,7 @@ influxdb:
       #operator: "Exists"
       #effect: "NoExecute"
   persistence:
-    enabled: false
+    enabled: true
     accessMode: ReadWriteOnce
     size: 15Gi
   config:
