@@ -30,3 +30,4 @@ smoke:
       - --debug
       - --http-port=8500
       - --verbosity=3
+      - --bail
