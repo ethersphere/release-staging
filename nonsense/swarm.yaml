@@ -1,8 +1,8 @@
 bootnode:
   image:
     repository: ethersphere/swarm
+    tag: 0.5.2
     #repository: stolen/swarm
-    tag: edge
     #tag: elad@sha256:9af906899b8017328f0fb68fdda675fdc13ac5cea23584ea34c1d1c122b961f9
   #nodeSelector:
     #nospot: "true"
@@ -35,8 +35,8 @@ bootnode:
 swarm:
   image:
     repository: ethersphere/swarm
+    tag: 0.5.2
     #repository: stolen/swarm
-    tag: edge
     #tag: elad@sha256:9af906899b8017328f0fb68fdda675fdc13ac5cea23584ea34c1d1c122b961f9
   #nodeSelector:
     #nospot: "true"
@@ -71,8 +71,8 @@ swarm:
       - --wsapi=admin,net,debug,bzz,stream
       - --store.cache.size=1000
       - --vmodule=swarm/network/*=3,swarm/storage/*=3
-      - --mutex-profile
-      - --block-profile
+      #- --mutex-profile
+      #- --block-profile
   secrets:
     password: qwerty
   ingress:
