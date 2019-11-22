@@ -22,12 +22,12 @@ smoke:
     prefix: "swarm-private"
     suffix: "swarm-private-headless"
     operation: "upload_and_sync"
-    influxdbEndpoint: "http://swarm-influxdb:8086"
+    influxdbEndpoint: "http://swarm-private-influxdb:8086"
     extraFlags:
       - --filesize=100000
       - --timeout=1000
       - --sync-delay
       - --debug
       - --http-port=8500
-      - --verbosity=3
+      - --verbosity=5
       - --bail

@@ -1,7 +1,7 @@
 bootnode:
   image:
     repository: ethersphere/swarm
-    tag: 0.5.2
+    tag: edge
     #repository: stolen/swarm
     #tag: elad@sha256:9af906899b8017328f0fb68fdda675fdc13ac5cea23584ea34c1d1c122b961f9
   #nodeSelector:
@@ -35,7 +35,7 @@ bootnode:
 swarm:
   image:
     repository: ethersphere/swarm
-    tag: 0.5.2
+    tag: edge
     #repository: stolen/swarm
     #tag: elad@sha256:9af906899b8017328f0fb68fdda675fdc13ac5cea23584ea34c1d1c122b961f9
   #nodeSelector:
@@ -141,7 +141,7 @@ grafana:
       datasources:
       - name: metrics
         type: influxdb
-        url: http://swarm-influxdb:8086
+        url: http://swarm-private-influxdb:8086
         database: metrics
         user: swarm
         password: swarm
