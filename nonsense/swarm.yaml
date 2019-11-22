@@ -1,9 +1,12 @@
 bootnode:
   image:
     repository: ethersphere/swarm
-    tag: 0.5.2
+    tag: edge-alltools
     #repository: stolen/swarm
-    #tag: elad@sha256:9af906899b8017328f0fb68fdda675fdc13ac5cea23584ea34c1d1c122b961f9
+    #tag: elad@sha256:683348ce144d36216fa21e08995857aff20cda1c76590b76e1ee48b0f8f18768
+    #tag: elad@sha256:9af906899b8017328f0fb68fdda675fdc13ac5cea23584ea34c1d1c122b961f9 //above is fetcher mutex move
+    #tag: elad@sha256:6f8f4166f5e34a2b4a6eb893bab90e6992fb8a3f740b1ae0a1906faf78660c42 
+    #tag: elad@sha256:a270a1ebf6aa014ae70874a1bd781512b9c3bb6bb8176c46f30486a077fb6dcc // bin-zero thingy
   #nodeSelector:
     #nospot: "true"
   #tolerations:
@@ -35,8 +38,11 @@ bootnode:
 swarm:
   image:
     repository: ethersphere/swarm
-    tag: 0.5.2
+    tag: edge
     #repository: stolen/swarm
+    #tag: elad@sha256:683348ce144d36216fa21e08995857aff20cda1c76590b76e1ee48b0f8f18768
+    #tag: elad@sha256:6f8f4166f5e34a2b4a6eb893bab90e6992fb8a3f740b1ae0a1906faf78660c42
+    #tag: elad@sha256:a270a1ebf6aa014ae70874a1bd781512b9c3bb6bb8176c46f30486a077fb6dcc
     #tag: elad@sha256:9af906899b8017328f0fb68fdda675fdc13ac5cea23584ea34c1d1c122b961f9
   #nodeSelector:
     #nospot: "true"
@@ -71,8 +77,8 @@ swarm:
       - --wsapi=admin,net,debug,bzz,stream
       - --store.cache.size=1000
       - --vmodule=swarm/network/*=3,swarm/storage/*=3
-      #- --mutex-profile
-      #- --block-profile
+      - --mutex-profile
+      - --block-profile
   secrets:
     password: qwerty
   ingress:

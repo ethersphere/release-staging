@@ -31,3 +31,4 @@ smoke:
       - --http-port=8500
       - --verbosity=3
       - --bail
+      - --sync-mode=both
