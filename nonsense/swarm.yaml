@@ -1,21 +1,33 @@
 bootnode:
   image:
-    repository: ethersphere/swarm
-    tag: edge-alltools
-    #repository: stolen/swarm
-    #tag: elad@sha256:683348ce144d36216fa21e08995857aff20cda1c76590b76e1ee48b0f8f18768
+    #repository: ethersphere/swarm
+    #tag: edge
+    repository: stolen/swarm
+    tag: elad@sha256:7c48584577a2637462eb96de42a6012d47642947be0f31eff046b911ed8fea08
+    #tag: elad@sha256:dc7cb4a7301a6edf0208923679a5c0eec1500039a0e8cddac735565feb508035 // above is fetchers im mem pr
+    #tag: elad@sha256:5eacc86a6b877ae52470332999578d8b772c1e18c1cc2924d190f50f60d18d7e //above is 0.5.4rc
+    #tag: elad@sha256:b5ee0ee5e48fde5c0a1e289f00c0e4d90765d82adcbc2e0ee300a957f0ad4989 // above is LB retrieval
+    #tag: elad@sha256:56d0d302370236cd145380c55ffc70303647f22cf934718546f06fd02b921730 // above is fetcher optimization
+    #tag: elad@sha256:683348ce144d36216fa21e08995857aff20cda1c76590b76e1ee48b0f8f18768 // above is pushsync fix and bin zero sync change
     #tag: elad@sha256:9af906899b8017328f0fb68fdda675fdc13ac5cea23584ea34c1d1c122b961f9 //above is fetcher mutex move
     #tag: elad@sha256:6f8f4166f5e34a2b4a6eb893bab90e6992fb8a3f740b1ae0a1906faf78660c42 
     #tag: elad@sha256:a270a1ebf6aa014ae70874a1bd781512b9c3bb6bb8176c46f30486a077fb6dcc // bin-zero thingy
   #nodeSelector:
-    #nospot: "true"
+    #dedicated: "true"
   #tolerations:
-    #- key: "nospot"
+    #- key: "dedicated"
       #operator: "Exists"
       #effect: "NoSchedule"
-    #- key: "nospot"
+    #- key: "dedicated"
       #operator: "Exists"
       #effect: "NoExecute"
+  resources:
+    requests:
+      memory: 1024Mi
+      cpu: null
+    limits:
+      memory: 1024Mi
+      cpu: null
   terminationGracePeriodSeconds: 3
   updateStrategy:
     type: "OnDelete"
@@ -27,30 +39,20 @@ bootnode:
     storageClass: "gp2-delete"
     accessMode: ReadWriteOnce
     size: 1Gi
-  resources:
-    requests:
-      memory: 512Mi
-      cpu: null
-    limits:
-      memory: 1024Mi
-      cpu: null
 
 swarm:
   image:
-    repository: ethersphere/swarm
-    tag: edge
-    #repository: stolen/swarm
-    #tag: elad@sha256:683348ce144d36216fa21e08995857aff20cda1c76590b76e1ee48b0f8f18768
-    #tag: elad@sha256:6f8f4166f5e34a2b4a6eb893bab90e6992fb8a3f740b1ae0a1906faf78660c42
-    #tag: elad@sha256:a270a1ebf6aa014ae70874a1bd781512b9c3bb6bb8176c46f30486a077fb6dcc
-    #tag: elad@sha256:9af906899b8017328f0fb68fdda675fdc13ac5cea23584ea34c1d1c122b961f9
+    #repository: ethersphere/swarm
+    #tag: edge
+    repository: stolen/swarm
+    tag: elad@sha256:7c48584577a2637462eb96de42a6012d47642947be0f31eff046b911ed8fea08
   #nodeSelector:
-    #nospot: "true"
+    #dedicated: "true"
   #tolerations:
-    #- key: "nospot"
+    #- key: "dedicated"
       #operator: "Exists"
       #effect: "NoSchedule"
-    #- key: "nospot"
+    #- key: "dedicated"
       #operator: "Exists"
       #effect: "NoExecute"
   metricsEnabled: true
