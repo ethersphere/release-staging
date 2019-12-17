@@ -1,18 +1,23 @@
 bootnode:
+  nodeSelector:
+    dedicated: "true"
+  tolerations:
+    - key: "dedicated"
+      operator: "Exists"
+      effect: "NoSchedule"
+    - key: "dedicated"
+      operator: "Exists"
+      effect: "NoExecute"
+  resources:
+    requests:
+      memory: 1500Mi
+      cpu: null
+    limits:
+      memory: 1500Mi
+      cpu: null
   image:
-    repository: ethersphere/swarm
-    tag: edge
-    #repository: stolen/swarm
-    #tag: elad@sha256:9af906899b8017328f0fb68fdda675fdc13ac5cea23584ea34c1d1c122b961f9
-  #nodeSelector:
-    #nospot: "true"
-  #tolerations:
-    #- key: "nospot"
-      #operator: "Exists"
-      #effect: "NoSchedule"
-    #- key: "nospot"
-      #operator: "Exists"
-      #effect: "NoExecute"
+    repository: janos/swarm
+    tag: latest
   terminationGracePeriodSeconds: 3
   updateStrategy:
     type: "OnDelete"
@@ -24,29 +29,27 @@ bootnode:
     storageClass: "gp2-delete"
     accessMode: ReadWriteOnce
     size: 1Gi
-  resources:
-    requests:
-      memory: 512Mi
-      cpu: null
-    limits:
-      memory: 1024Mi
-      cpu: null
 
 swarm:
+  nodeSelector:
+    dedicated: "true"
+  tolerations:
+    - key: "dedicated"
+      operator: "Exists"
+      effect: "NoSchedule"
+    - key: "dedicated"
+      operator: "Exists"
+      effect: "NoExecute"
+  resources:
+    requests:
+      memory: 900Mi
+      cpu: null
+    limits:
+      memory: 900Mi
+      cpu: null
   image:
-    repository: ethersphere/swarm
-    tag: edge
-    #repository: stolen/swarm
-    #tag: elad@sha256:9af906899b8017328f0fb68fdda675fdc13ac5cea23584ea34c1d1c122b961f9
-  #nodeSelector:
-    #nospot: "true"
-  #tolerations:
-    #- key: "nospot"
-      #operator: "Exists"
-      #effect: "NoSchedule"
-    #- key: "nospot"
-      #operator: "Exists"
-      #effect: "NoExecute"
+    repository: janos/swarm
+    tag: latest
   metricsEnabled: true
   tracingEnabled: true
   profilingEnabled: true
@@ -62,7 +65,7 @@ swarm:
     debug: true
     maxpeers: 40
     bzznetworkid: 172
-    storesize: "160000" # 160000 * 4KB = 640MB
+    storesize: "1000000" # 160000 * 4KB = 640MB
     extraFlags:
       - --ws
       - --ens-api=test:112234455c3a32fd11230c42e7bccd4a84e02010@http://ropsten-geth-geth.geth:8545
@@ -91,13 +94,6 @@ swarm:
     storageClass: "gp2-delete"
     accessMode: ReadWriteOnce
     size: 30Gi
-  resources:
-    requests:
-      memory: 412Mi
-      cpu: null
-    limits:
-      memory: 1024Mi
-      cpu: null
   tracingAgent:
     resources:
       requests:

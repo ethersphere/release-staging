@@ -9,12 +9,9 @@ smoke:
 
   imagePullPolicy: Always
   image:
-    repository: ethersphere/swarm
-    tag: edge-alltools
-    #repository: ethersphere/swarm
-    #tag: edge-alltools
-  schedule: "*/3 * * * *"
-  #schedule: "* * * * *"
+    repository: janos/swarm
+    tag: latest
+  schedule: "* * * * *"
   successfulJobsHistoryLimit: 20
   config:
     swarmReplicas: 40
