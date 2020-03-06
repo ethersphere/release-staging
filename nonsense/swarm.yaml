@@ -93,7 +93,7 @@ influxdb:
       memory: 1Gi
       cpu: 0.2
   nodeSelector:
-    eks.amazonaws.com/nodegroup: "default-1a"
+    node-group: "default"
   persistence:
     enabled: true
     accessMode: ReadWriteOnce
@@ -106,7 +106,7 @@ influxdb:
 
 grafana:
   nodeSelector:
-    eks.amazonaws.com/nodegroup: "default-1a"
+    node-group: "default"
   datasources:
     datasources.yaml:
       apiVersion: 1
