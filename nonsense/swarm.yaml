@@ -1,60 +1,30 @@
 bootnode:
   image:
-    #repository: ethersphere/swarm
-    #tag: edge
     repository: stolen/swarm
-    tag: elad@sha256:7c48584577a2637462eb96de42a6012d47642947be0f31eff046b911ed8fea08
-    #tag: elad@sha256:dc7cb4a7301a6edf0208923679a5c0eec1500039a0e8cddac735565feb508035 // above is fetchers im mem pr
-    #tag: elad@sha256:5eacc86a6b877ae52470332999578d8b772c1e18c1cc2924d190f50f60d18d7e //above is 0.5.4rc
-    #tag: elad@sha256:b5ee0ee5e48fde5c0a1e289f00c0e4d90765d82adcbc2e0ee300a957f0ad4989 // above is LB retrieval
-    #tag: elad@sha256:56d0d302370236cd145380c55ffc70303647f22cf934718546f06fd02b921730 // above is fetcher optimization
-    #tag: elad@sha256:683348ce144d36216fa21e08995857aff20cda1c76590b76e1ee48b0f8f18768 // above is pushsync fix and bin zero sync change
-    #tag: elad@sha256:9af906899b8017328f0fb68fdda675fdc13ac5cea23584ea34c1d1c122b961f9 //above is fetcher mutex move
-    #tag: elad@sha256:6f8f4166f5e34a2b4a6eb893bab90e6992fb8a3f740b1ae0a1906faf78660c42 
-    #tag: elad@sha256:a270a1ebf6aa014ae70874a1bd781512b9c3bb6bb8176c46f30486a077fb6dcc // bin-zero thingy
-  #nodeSelector:
-    #dedicated: "true"
-  #tolerations:
-    #- key: "dedicated"
-      #operator: "Exists"
-      #effect: "NoSchedule"
-    #- key: "dedicated"
-      #operator: "Exists"
-      #effect: "NoExecute"
+    tag: elad@sha256:433bf0cda1e891a56a209a65fdd02eedb46db6fa5a7724a508e52234674dcbc4
   resources:
     requests:
-      memory: 1024Mi
-      cpu: null
+      memory: 524Mi
     limits:
-      memory: 1024Mi
-      cpu: null
+      memory: 724Mi
   terminationGracePeriodSeconds: 3
   updateStrategy:
     type: "OnDelete"
+  nodeSelector:
+    node-group: "swarm"
   config:
     extraFlags:
       - --tracing
   persistence:
-    enabled: true
+    enabled: false
     storageClass: "gp2-delete"
     accessMode: ReadWriteOnce
     size: 1Gi
 
 swarm:
   image:
-    #repository: ethersphere/swarm
-    #tag: edge
+    tag: elad@sha256:433bf0cda1e891a56a209a65fdd02eedb46db6fa5a7724a508e52234674dcbc4
     repository: stolen/swarm
-    tag: elad@sha256:7c48584577a2637462eb96de42a6012d47642947be0f31eff046b911ed8fea08
-  #nodeSelector:
-    #dedicated: "true"
-  #tolerations:
-    #- key: "dedicated"
-      #operator: "Exists"
-      #effect: "NoSchedule"
-    #- key: "dedicated"
-      #operator: "Exists"
-      #effect: "NoExecute"
   metricsEnabled: true
   tracingEnabled: true
   profilingEnabled: true
@@ -64,13 +34,16 @@ swarm:
   podManagementPolicy: Parallel
   updateStrategy:
     type: "OnDelete"
+  nodeSelector:
+    node-group: "swarm"
   config:
-    ens_api: "eth:314159265dD8dbb310642f98f50C066173C1259b@http://mainnet-geth-geth.geth:8545"
+    #ens_api: "eth:314159265dD8dbb310642f98f50C066173C1259b@http://mainnet-geth-geth.geth:8545"
+    ens_api: "http://mainnet-geth-geth.geth:8545"
     verbosity: 4
     debug: true
     maxpeers: 40
     bzznetworkid: 172
-    storesize: "160000" # 160000 * 4KB = 640MB
+    storesize: "100000" # 160000 * 4KB = 640MB
     extraFlags:
       - --ws
       - --ens-api=test:112234455c3a32fd11230c42e7bccd4a84e02010@http://ropsten-geth-geth.geth:8545
@@ -102,36 +75,25 @@ swarm:
   resources:
     requests:
       memory: 412Mi
-      cpu: null
     limits:
       memory: 1024Mi
-      cpu: null
   tracingAgent:
     resources:
       requests:
         memory: 64Mi
-        cpu: null
       limits:
         memory: 64Mi
-        cpu: null
 
 influxdb:
   resources:
     requests:
       memory: 256Mi
-      cpu: null
+      cpu: 0.2
     limits:
-      memory: 8Gi
-      cpu: null
-  #nodeSelector:
-    #nospot: "true"
-  #tolerations:
-    #- key: "nospot"
-      #operator: "Exists"
-      #effect: "NoSchedule"
-    #- key: "nospot"
-      #operator: "Exists"
-      #effect: "NoExecute"
+      memory: 1Gi
+      cpu: 0.2
+  nodeSelector:
+    node-group: "default"
   persistence:
     enabled: true
     accessMode: ReadWriteOnce
@@ -143,6 +105,8 @@ influxdb:
       trace_logging_enabled: true
 
 grafana:
+  nodeSelector:
+    node-group: "default"
   datasources:
     datasources.yaml:
       apiVersion: 1
@@ -181,11 +145,9 @@ grafana:
 jaeger:
   resources:
     requests:
-      memory: 2000Mi
-      cpu: null
+      memory: 1000Mi
     limits:
-      memory: 5000Mi
-      cpu: null
+      memory: 1000Mi
   config:
     env:
       SPAN_STORAGE_TYPE: memory

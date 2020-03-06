@@ -1,11 +1,11 @@
 smoke:
   resources:
     requests:
-      memory: 412Mi
-      cpu: 1
+      memory: 350Mi
+      cpu: 0.1
     limits:
-      memory: 1256Mi
-      cpu: 1
+      memory: 1050Mi
+      cpu: 0.9
 
   imagePullPolicy: Always
   image:
@@ -13,7 +13,7 @@ smoke:
     tag: edge-alltools
     #repository: ethersphere/swarm
     #tag: edge-alltools
-  schedule: "*/3 * * * *"
+  schedule: "* * * * *"
   #schedule: "* * * * *"
   successfulJobsHistoryLimit: 20
   config:
@@ -30,5 +30,4 @@ smoke:
       - --debug
       - --http-port=8500
       - --verbosity=3
-      - --bail
       - --sync-mode=both
