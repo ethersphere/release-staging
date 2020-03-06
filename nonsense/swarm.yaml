@@ -1,7 +1,7 @@
 bootnode:
   image:
     repository: stolen/swarm
-    tag: elad@sha256:433bf0cda1e891a56a209a65fdd02eedb46db6fa5a7724a508e52234674dcbc4
+    tag: elad@sha256:09dcdacc2730aba3ebdcdf9384b3b54b18080b44fbc272cb5a15f6743bf48528
   resources:
     requests:
       memory: 524Mi
@@ -23,7 +23,7 @@ bootnode:
 
 swarm:
   image:
-    tag: elad@sha256:433bf0cda1e891a56a209a65fdd02eedb46db6fa5a7724a508e52234674dcbc4
+    tag: elad@sha256:09dcdacc2730aba3ebdcdf9384b3b54b18080b44fbc272cb5a15f6743bf48528
     repository: stolen/swarm
   metricsEnabled: true
   tracingEnabled: true
