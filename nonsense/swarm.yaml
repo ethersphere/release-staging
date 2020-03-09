@@ -1,7 +1,9 @@
 bootnode:
   image:
-    repository: stolen/swarm
-    tag: elad@sha256:09dcdacc2730aba3ebdcdf9384b3b54b18080b44fbc272cb5a15f6743bf48528
+    repository: ethersphere/swarm
+    tag: 0.5.6
+    #repository: stolen/swarm
+    #tag: elad@sha256:91a1876697deab30379f0f4296c7575da42d8626d4ef6a8fb53c547e7bb66579
   resources:
     requests:
       memory: 524Mi
@@ -23,8 +25,10 @@ bootnode:
 
 swarm:
   image:
-    tag: elad@sha256:09dcdacc2730aba3ebdcdf9384b3b54b18080b44fbc272cb5a15f6743bf48528
-    repository: stolen/swarm
+    repository: ethersphere/swarm
+    tag: 0.5.6
+    #tag: elad@sha256:91a1876697deab30379f0f4296c7575da42d8626d4ef6a8fb53c547e7bb66579
+    #repository: stolen/swarm
   metricsEnabled: true
   tracingEnabled: true
   profilingEnabled: true
@@ -43,7 +47,7 @@ swarm:
     debug: true
     maxpeers: 40
     bzznetworkid: 172
-    storesize: "100000" # 160000 * 4KB = 640MB
+    storesize: "50000" # 160000 * 4KB = 640MB
     extraFlags:
       - --ws
       - --ens-api=test:112234455c3a32fd11230c42e7bccd4a84e02010@http://ropsten-geth-geth.geth:8545
@@ -71,12 +75,12 @@ swarm:
     enabled: true
     storageClass: "gp2-delete"
     accessMode: ReadWriteOnce
-    size: 30Gi
+    size: 300Gi
   resources:
     requests:
-      memory: 412Mi
+      memory: 400Mi
     limits:
-      memory: 1024Mi
+      memory: 824Mi
   tracingAgent:
     resources:
       requests:
@@ -95,7 +99,7 @@ influxdb:
   nodeSelector:
     node-group: "default"
   persistence:
-    enabled: true
+    enabled: false
     accessMode: ReadWriteOnce
     size: 15Gi
   config:
