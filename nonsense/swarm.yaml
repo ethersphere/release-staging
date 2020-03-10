@@ -19,7 +19,7 @@ bootnode:
       - --tracing
   persistence:
     enabled: false
-    storageClass: "gp2-delete"
+    storageClass: "gp2-delete-wfc"
     accessMode: ReadWriteOnce
     size: 1Gi
 
@@ -73,14 +73,16 @@ swarm:
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
   persistence:
     enabled: true
-    storageClass: "gp2-delete"
+    storageClass: "gp2-delete-wfc"
     accessMode: ReadWriteOnce
-    size: 300Gi
+    size: 30Gi
   resources:
     requests:
       memory: 400Mi
+      cpu: 0.75
     limits:
       memory: 824Mi
+      cpu: 1.5
   tracingAgent:
     resources:
       requests:
