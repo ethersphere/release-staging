@@ -1,0 +1,147 @@
+bootnode:
+  image:
+    repository: ethersphere/swarm
+    tag: 0.5.6
+  resources:
+    requests:
+      memory: 512Mi
+    limits:
+      memory: 768Mi
+  terminationGracePeriodSeconds: 3
+  updateStrategy:
+    type: "OnDelete"
+  nodeSelector:
+    node-group: "swarm"
+  config:
+    extraFlags:
+      - --tracing
+  persistence:
+    enabled: false
+    storageClass: "gp2-delete-wfc"
+    accessMode: ReadWriteOnce
+    size: 1Gi
+
+swarm:
+  image:
+    repository: ethersphere/swarm
+    tag: 0.5.6
+  metricsEnabled: true
+  tracingEnabled: true
+  profilingEnabled: true
+  terminationGracePeriodSeconds: 3
+  replicaCount: 40
+  imagePullPolicy: Always
+  podManagementPolicy: Parallel
+  updateStrategy:
+    type: "OnDelete"
+  nodeSelector:
+    node-group: "swarm"
+  config:
+    ens_api: "http://mainnet-geth-geth.geth:8545"
+    verbosity: 4
+    debug: true
+    maxpeers: 40
+    bzznetworkid: 172
+    storesize: "50000" # 160000 * 4KB = 640MB
+    extraFlags:
+      - --ws
+      - --ens-api=test:112234455c3a32fd11230c42e7bccd4a84e02010@http://ropsten-geth-geth.geth:8545
+      - --wsaddr=0.0.0.0
+      - --wsorigins=*
+      - --wsapi=admin,net,debug,bzz,stream
+      - --store.cache.size=1000
+      - --vmodule=swarm/network/*=3,swarm/storage/*=3
+      - --mutex-profile
+      - --block-profile
+  secrets:
+    password: qwerty
+  ingress:
+    enabled: false
+  persistence:
+    enabled: true
+    storageClass: "gp2-delete-wfc"
+    accessMode: ReadWriteOnce
+    size: 3Gi
+  resources:
+    requests:
+      memory: 512Mi
+      cpu: 0.75
+    limits:
+      memory: 1024Mi
+      cpu: 1.5
+  tracingAgent:
+    resources:
+      requests:
+        memory: 64Mi
+      limits:
+        memory: 64Mi
+
+influxdb:
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 0.2
+    limits:
+      memory: 1Gi
+      cpu: 0.2
+  nodeSelector:
+    node-group: "default"
+  persistence:
+    enabled: false
+    accessMode: ReadWriteOnce
+    size: 15Gi
+  config:
+    meta:
+      logging_enabled: true
+    data:
+      trace_logging_enabled: true
+
+grafana:
+  nodeSelector:
+    node-group: "default"
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+      - name: metrics
+        type: influxdb
+        url: http://swarm-influxdb:8086
+        database: metrics
+        user: swarm
+        password: swarm
+        access: proxy
+        isDefault: true
+  dashboards:
+    default:
+      smoke:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/smoke.json
+      ldbstore:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/ldbstore.json
+      swarm:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/swarm.json
+      upload-speed:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/upload-speed.json
+      sliding:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/smoke-sliding.json
+      kad:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/kad.json
+      fetchers:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/fetchers.json
+      timeouts:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/timeouts.json
+      stream:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/stream.json
+      retrieve:
+        url: https://raw.githubusercontent.com/ethersphere/grafana-dashboards/master/retrieve.json
+
+jaeger:
+  resources:
+    requests:
+      memory: 1000Mi
+    limits:
+      memory: 1000Mi
+  config:
+    env:
+      SPAN_STORAGE_TYPE: memory
+    args:
+      - "--memory.max-traces=300000"

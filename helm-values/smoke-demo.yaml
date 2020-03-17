@@ -1,0 +1,33 @@
+smoke:
+  resources:
+    requests:
+      memory: 384Mi
+      cpu: 0.1
+    limits:
+      memory: 1024Mi
+      cpu: 0.9
+
+  imagePullPolicy: Always
+  image:
+    repository: ethersphere/swarm
+    tag: edge-alltools
+    #repository: ethersphere/swarm
+    #tag: edge-alltools
+  schedule: "* * * * *"
+  #schedule: "* * * * *"
+  successfulJobsHistoryLimit: 20
+  config:
+    swarmReplicas: 40
+    name: "upload-sync-a"
+    prefix: "swarm-private"
+    suffix: "swarm-private-headless"
+    operation: "upload_and_sync"
+    influxdbEndpoint: "http://swarm-influxdb:8086"
+    extraFlags:
+      - --filesize=100000
+      - --timeout=1000
+      - --sync-delay
+      - --debug
+      - --http-port=8500
+      - --verbosity=3
+      - --sync-mode=both

@@ -1,4 +1,0 @@
-swarm:
-  image:
-    repository: skylenet/swarm-test
-    tag: 0.5.0-rc1

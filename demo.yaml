@@ -1,0 +1,46 @@
+namespaces:
+  bee-demo:
+    protected: false
+  swarm-demo:
+    protected: false
+
+helmRepos:
+  ethersphere: "https://ethersphere.github.io/helm"
+  ethersphereold: "https://raw.githubusercontent.com/ethersphere/helm-charts-artifacts/master/"
+
+apps:
+  bee:
+    name: bee
+    namespace: bee-demo
+    description: "Bee demo"
+    chart: "ethersphere/bee"
+    version: "0.1.4"
+    enabled: true
+    valuesFiles:
+      - "helm-values/bee-demo.yaml"
+    set:
+      replicaCount: "$BEE_REPLICAS"
+    wait: true
+  swarm:
+    name: swarm
+    namespace: swarm-demo
+    description: "Swarm demo"
+    chart: "ethersphereold/swarm-private"
+    version: "0.0.6"
+    enabled: true
+    valuesFiles:
+      - "helm-values/swarm-demo.yaml"
+    set:
+      swarm.replicaCount: "$SWARM_REPLICAS"
+    wait: true
+  smoke:
+    name: smoke
+    namespace: swarm-demo
+    description: "Smoke test: Upload and sync"
+    chart: "ethersphereold/smoke"
+    version: "0.0.2"
+    enabled: true
+    valuesFile: "helm-values/smoke-demo.yaml"
+    set:
+      smoke.config.swarmReplicas: "$SWARM_REPLICAS"
+    wait: false
